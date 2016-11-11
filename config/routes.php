@@ -8,6 +8,10 @@
     HelloWorldController::list_memes();
   });
   
+  $routes->get('/memes/create', function() {
+    HelloWorldController::create_meme();
+  });
+  
   $routes->get('/memes/1', function() {
     HelloWorldController::single_meme();
   });
@@ -16,8 +20,8 @@
     HelloWorldController::edit_meme();
   });
   
-  $routes->post('/memes/1/edit', function() {
-    HelloWorldController::edit_meme();
+  $routes->get('/message/1/edit', function() {
+    HelloWorldController::edit_message();
   });
 
   $routes->get('/hiekkalaatikko', function() {

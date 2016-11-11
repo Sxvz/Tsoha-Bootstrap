@@ -12,6 +12,7 @@
 </div>
 <br/>
 <div>
+    <a href="/memeDB/memes/favourite"><button class="btn btn-success">Favourite</button></a>
     <a href="/memeDB/memes/1/edit"><button class="btn btn-warning">Edit</button></a>
     <a href="/memeDB/memes/1/remove"><button class="btn btn-danger">Remove</button></a>
 </div>
@@ -21,15 +22,21 @@
         <tbody>
             <tr>
                 <td style="width:20%;text-align:center">User</td>
-                <td style="width:60%">Message</td>
-                <td style="width:20%;text-align:center">Date</td>
+                <td style="width:50%">Message</td>
+                <td style="width:20%;text-align:center">Date<br/><strong>Edited on:</strong><br/>Later date</td>
+                <td style="width:10%"><a href="/memeDB/message/1/edit"><button class="btn btn-warning">Edit</button></a></td>
             </tr>
             <tr>
                 <td style="width:20%;text-align:center">User2</td>
                 <td style="width:60%">Another message</td>
                 <td style="width:20%;text-align:center">Date</td>
+                <td></td>
             </tr>
         </tbody>
     </table>
 </div>
+<form action="/memeDB/message/send" method="post">
+    <textarea class="form-control" id="message"></textarea>
+    <button type="submit" class="btn btn-default">Send</button>
+</form>
 {% endblock %}

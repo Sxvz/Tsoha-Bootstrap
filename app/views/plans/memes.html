@@ -1,20 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
 <form class="form-inline" action="/memeDB/memes" method="get">
-    <div class="col-md-8 col-xs-12 form-group">
-        <input type="text" class="form-control" id="search_phrase" style="width:100%">
+    <div class="col-xs-12 col-md-8 form-group">
+        <input type="search" class="form-control" id="search_phrase" style="width:100%">
     </div>
-    <div class="col-md-3 col-xs-8 form-group">
-        <label class="col-md-4 col-xs-6" for="search_type">Search by</label>
-        <select class="col-md-8 col-xs-6 form-control" id="search_type">
-            <option>Title</option>
-            <option>Content</option>
-            <option>Tags</option>
-            <option>User</option>
-        </select>
-    </div>
-    <div class="col-md-1 col-xs-4 form-group">
-        <button type="submit" class="btn btn-default">Search</button>
+    <div class="col-xs-12 col-md-4 form-group">
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <label for="search_type">Search by</label>
+            </div>
+            <div class="col-xs-8 col-md-4">
+                <select class="form-control" id="search_type" style="width:100%">
+                    <option>Title</option>
+                    <option>Type</option>
+                    <option>Content</option>
+                    <option>Tags</option>
+                    <option>User</option>
+                </select>
+            </div>
+            <div class="col-xs-4 col-md-4">
+                <button type="submit" class="btn btn-default" style="width:100%">Search</button>
+            </div>
+        </div>
     </div>
 </form>
-{% endblock%}
+<br/>
+<br/>
+<br/>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Content preview</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr onclick="document.location = '/memeDB/memes/1'">
+            <td style="width:50%">Meme Title</td>
+            <td style="width:20%">Image</td>
+            <td style="width:30%"><img src="https://fat.gfycat.com/OptimalThoseFoal.gif" alt="picture of a meme" style="width:100%;max-width:50px"></td>
+        </tr>
+        <!--<tr>
+            <td>Lenny face</td>
+            <td>Copypasta</td>
+            <td>( ͡° ͜ʖ ͡°)</td>
+        </tr>-->
+    </tbody>
+</table>
+{% endblock %}

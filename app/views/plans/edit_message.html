@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Editing a message in: <small>Meme Title</small></h2>
+<form action="/memeDB/message/1/edit" method="post">
+    <textarea class="form-control" id="message">Message</textarea>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button type="reset" class="btn btn-default">Undo</button>
+    <a href="/memeDB/memes/1"><button type="button" class="btn btn-warning">Return without saving</button></a>
+</form>
+{% endblock %}
