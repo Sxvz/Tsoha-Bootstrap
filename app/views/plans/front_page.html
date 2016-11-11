@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <h2>memeDB <small>Don't let your memes be dreams</small></h2>
+        </div>
+        <div>
+            <h3>Current User</h3>
+            <a href="/memeDB"><button class="btn btn-default" style="width:100%">Favourites</button></a>
+            <a href="/memeDB"><button class="btn btn-default" style="width:100%">Own Memes</button></a>
+        </div>
+        <div>
+            <a href="/memeDB/memes"><button class="btn btn-primary" style="width:100%">Memes</button></a>
+            <a href="/memeDB/tags"><button class="btn btn-primary" style="width:100%">Tags</button></a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3>Random Meme</h3>
+        <h4><a href="/memeDB/memes/1">Meme Title</a></h4>
+        <a href="/memeDB/memes/1">
+            <img src="https://fat.gfycat.com/OptimalThoseFoal.gif" class="img-responsive" alt="picture of a meme">
+        </a>
+    </div>
+    <div class="col-md-12">
+
+    </div>
+</div>
+{% endblock %}

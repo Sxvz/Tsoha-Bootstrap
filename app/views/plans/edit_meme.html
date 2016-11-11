@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Editing meme: <small>Meme Title</small></h2>
+<form action="/memeDB/memes/1/edit" method="post">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" value="Meme Title">
+    </div>
+    <div class="form-group">
+        <label for="type">Type</label>
+        <input type="text" class="form-control" id="type" value="Image" disabled>
+        <p class="help-block">The type of a meme cannot be changed</p>
+    </div>
+    <div class="form-group">
+        <label for="image_link">Link to image</label>
+        <input type="text" class="form-control" id="image_link" value="https://fat.gfycat.com/OptimalThoseFoal.gif">
+    </div>
+    <div class="form-group">
+        <label for="tags">Tags</label>
+        <input type="text" class="form-control" id="tags" value="tag1; tag2;">
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a href="/memeDB/memes/1"><button type="button" class="btn btn-warning">Return without saving</button></a>
+</form>
+{% endblock %}
