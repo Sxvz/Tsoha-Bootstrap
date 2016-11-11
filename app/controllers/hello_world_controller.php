@@ -1,14 +1,24 @@
 <?php
 
-  class HelloWorldController extends BaseController{
+class HelloWorldController extends BaseController {
 
-    public static function index(){
-      // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
-   	  View::make('home.html');
+    public static function index() {
+        View::make('plans/front_page.html');
+    }
+    
+    public static function list_memes() {
+        View::make('plans/memes.html');
+    }
+    
+    public static function single_meme() {
+        View::make('plans/meme.html');
+    }
+    
+    public static function edit_meme() {
+        View::make('plans/edit_meme.html');
     }
 
-    public static function sandbox(){
-      // Testaa koodiasi täällä
-      echo 'Hello World!';
+    public static function sandbox() {
+        View::make('helloworld.html');
     }
-  }
+}
