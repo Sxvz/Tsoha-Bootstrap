@@ -24,6 +24,9 @@
     HelloWorldController::edit_message();
   });
 
+  $routes->get('/tags', function() {
+    HelloWorldController::list_tags();
+  });
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });

@@ -25,6 +25,10 @@ class HelloWorldController extends BaseController {
     public static function edit_message() {
         View::make('plans/edit_message.html');
     }
+    
+    public static function list_tags() {
+        View::make('plans/tags.html');
+    }
 
     public static function sandbox() {
         View::make('helloworld.html');

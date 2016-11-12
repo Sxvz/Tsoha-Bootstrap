@@ -3,6 +3,8 @@
 <div>
     <h2>Meme Title</h2>
     <img src="https://fat.gfycat.com/OptimalThoseFoal.gif" class="img-responsive" alt="picture of a meme">
+    <!--Videot näin halutaan tietää vain id-->
+    <!--<td><iframe width="560" height="315" src="https://www.youtube.com/embed/WJc7S_UOfl4" frameborder="0" fullscreenallowed></iframe></td>-->
     <ul class="list-inline">
         <li><strong>Tags:</strong></li>
         <li><a href="/memeBD/tags/1">tag1</a></li>
@@ -36,7 +38,7 @@
     </table>
 </div>
 <form action="/memeDB/message/send" method="post">
-    <textarea class="form-control" id="message"></textarea>
+    <textarea class="form-control" rows="5" id="message"></textarea>
     <button type="submit" class="btn btn-default">Send</button>
 </form>
 {% endblock %}
