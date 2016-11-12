@@ -12,7 +12,6 @@ Linkkejä näkymäsuunnitelmiin:
 - [Meemien luontisivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes/create)
 - [Meemin esittelysivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes/1)
 - [Meemin muokkaussivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes/1/edit)
-- [Meemien listaussivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes)
 - [Viestin muokkaussivu](http://sobackr.users.cs.helsinki.fi/memeDB/message/1/edit)
 
 ## Työn aihe
