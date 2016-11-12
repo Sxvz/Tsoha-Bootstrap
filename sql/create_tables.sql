@@ -25,6 +25,11 @@ CREATE TABLE MemeTags(
   meme_id INTEGER REFERENCES Meme(id)
 );
 
+CREATE TABLE Favourites(
+  usr_id INTEGER REFERENCES Usr(id),
+  meme_id INTEGER REFERENCES Meme(id)
+);
+
 CREATE TABLE Comment(
   id SERIAL PRIMARY KEY,
   parent_meme INTEGER REFERENCES Meme(id),
