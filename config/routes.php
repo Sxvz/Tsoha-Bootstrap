@@ -23,22 +23,6 @@
   $routes->get('/message/1/edit', function() {
     HelloWorldController::edit_message();
   });
-
-  $routes->get('/tags', function() {
-    HelloWorldController::list_tags();
-  });
-  
-  $routes->get('/tags/1', function() {
-    HelloWorldController::single_tag();
-  });
-  
-  $routes->get('/tags/1/edit', function() {
-    HelloWorldController::edit_tag();
-  });
-  
-  $routes->get('/tags/create', function() {
-    HelloWorldController::create_tag();
-  });
   
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
