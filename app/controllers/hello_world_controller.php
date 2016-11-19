@@ -27,6 +27,10 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        View::make('helloworld.html');
+        $meme = Meme::find_one(1);
+        $memes = Meme::find_all();
+        
+        Kint::dump($meme);
+        Kint::dump($memes);
     }
 }

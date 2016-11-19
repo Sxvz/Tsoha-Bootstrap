@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <h2>{{meme.title}}</h2>
+    {% if meme.type == 'Image' %}
+    <img src="{{meme.content}}" class="img-responsive" alt="picture of a meme">
+    {% elseif meme.type == 'Copypasta' %}
+    <p>{{meme.content}}</p>
+    {% elseif meme.type == 'Video' %}
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{meme.content}}" allowfullscreen style="frameborder:0"></iframe>
+    </div>
+    {% endif %}
+    Posted by: <a href="/memeDB/memes?user={{meme.poster}}">{{meme.poster}}</a>
+</div>
+<br/>
+<div>
+    <a href="/memeDB/memes/{{meme.id}}/favorite"><button class="btn btn-success">Favourite</button></a>
+    <a href="/memeDB/memes/{{meme.id}}/edit"><button class="btn btn-warning">Edit</button></a>
+</div>
+<br/>
+<div>
+    <table class="table table-bordered table-striped" style="width:100%">
+        <tbody>
+            <!--if logged in as poster-->
+            {% for comment in comments %}
+            <tr>
+                <td style="width:20%;text-align:center">{{comment.poster}}</td>
+                <td style="width:50%">{{comment.message}}</td>
+                <td style="width:20%;text-align:center">{{comment.posted|date('d.m.Y H:i')}}
+                    {% if comment.edited != null %}
+                    <br/><strong>Edited on:</strong><br/>{{comment.edited|date('d.m.Y H:i')}}
+                    {% endif %}
+                </td>
+                <td style="width:10%"><a href="/memeDB/comment/{{comment.id}}/edit"><button class="btn btn-warning">Edit</button></a></td>
+            </tr>
+            {% endfor %}
+            <!--if logged in as someone else
+            <tr>
+                <td style="width:20%;text-align:center">User2</td>
+                <td style="width:60%">Another message</td>
+                <td style="width:20%;text-align:center">Date</td>
+                <td></td>
+            </tr>-->
+        </tbody>
+    </table>
+</div>
+<form action="/memeDB/message/send" method="post">
+    <textarea class="form-control" rows="5" id="message"></textarea>
+    <button type="submit" class="btn btn-default">Send</button>
+</form>
+{% endblock %}

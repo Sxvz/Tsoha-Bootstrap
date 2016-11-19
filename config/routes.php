@@ -1,29 +1,29 @@
 <?php
 
-  $routes->get('/', function() {
-    HelloWorldController::index();
-  });
-  
-  $routes->get('/memes', function() {
-    HelloWorldController::list_memes();
-  });
-  
-  $routes->get('/memes/create', function() {
+$routes->get('/', function() {
+    MemeController::index();
+});
+
+$routes->get('/memes', function() {
+    MemeController::list_memes();
+});
+
+$routes->get('/memes/create', function() {
     HelloWorldController::create_meme();
-  });
-  
-  $routes->get('/memes/1', function() {
-    HelloWorldController::single_meme();
-  });
-  
-  $routes->get('/memes/1/edit', function() {
+});
+
+$routes->get('/memes/:id', function($id) {
+    MemeController::single_meme($id);
+});
+
+$routes->get('/memes/1/edit', function() {
     HelloWorldController::edit_meme();
-  });
-  
-  $routes->get('/message/1/edit', function() {
-    HelloWorldController::edit_message();
-  });
-  
-  $routes->get('/hiekkalaatikko', function() {
+});
+
+$routes->get('/comment/1/edit', function() {
+    HelloWorldController::edit_comment();
+});
+
+$routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
-  });
+});
