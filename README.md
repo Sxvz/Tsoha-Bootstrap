@@ -5,7 +5,7 @@ Yleisiä linkkejä:
 * [Linkki sovellukseeni](http://sobackr.users.cs.helsinki.fi/memeDB/)
 * [Linkki dokumentaatiooni](doc/dokumentaatio.pdf)
 
-Linkkejä näkymäsuunnitelmiin:
+Pikalinkkejä:
 
 - [Etusivu](http://sobackr.users.cs.helsinki.fi/memeDB/)
 - [Meemien listaussivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes)
