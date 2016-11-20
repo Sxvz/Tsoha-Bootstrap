@@ -9,7 +9,11 @@ $routes->get('/memes', function() {
 });
 
 $routes->get('/memes/create', function() {
-    HelloWorldController::create_meme();
+    MemeController::create_meme();
+});
+
+$routes->post('/memes/create', function() {
+    MemeController::store();
 });
 
 $routes->get('/memes/:id', function($id) {

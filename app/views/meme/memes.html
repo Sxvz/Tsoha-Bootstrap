@@ -2,7 +2,7 @@
 {% block content %}
 <form class="form-inline" action="/memeDB/memes" method="get">
     <div class="col-xs-12 col-md-8 form-group">
-        <input type="search" class="form-control" id="search_phrase" style="width:100%">
+        <input name="search_phrase" type="search" class="form-control" id="search_phrase" style="width:100%">
     </div>
     <div class="col-xs-12 col-md-4 form-group">
         <div class="row">
@@ -10,11 +10,11 @@
                 <label for="search_type">Search by</label>
             </div>
             <div class="col-xs-8 col-md-4">
-                <select class="form-control" id="search_type" style="width:100%">
+                <select name="search_type" class="form-control" id="search_type" style="width:100%">
                     <option>Title</option>
                     <option>Type</option>
                     <option>Content</option>
-                    <option>User</option>
+                    <option>Poster</option>
                 </select>
             </div>
             <div class="col-xs-4 col-md-4">
@@ -41,7 +41,7 @@
             <tr onclick="document.location = '/memeDB/memes/{{meme.id}}'">
                 <td>{{meme.title}}</td>
                 <td class="hidden-xs">{{meme.type}}</td>
-                <td style="word-break:break-all">
+                <td><!-- style="word-break:break-all">-->
                     {% if meme.type == 'Image' %}
                     <img class="img-responsive" src="{{meme.content}}" alt="picture of a meme" style="max-height:100px">
                     {% elseif meme.type == 'Copypasta' %}
@@ -59,7 +59,7 @@
 <ul class="list-inline">
     <li><strong>Pages:</strong></li>
     {% for page in pages %}
-    <li><a href="/memeDB/memes?page={{page}}" style="color:green">{{page}}</a></li>
+    <li><a href="/memeDB/memes?page={{page}}{{additional_params}}" style="color:green">{{page}}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}

@@ -14,7 +14,7 @@ INSERT INTO Meme (poster, title, type, content) VALUES ('User2', 'Why not Zoidbe
 INSERT INTO Meme (poster, title, type, content) VALUES ('User2', 'One does not simply explain memes to someone', 'Image', 'http://s2.quickmeme.com/img/98/98b80beaf6a3449cc2410730d33d2ce863814382b83fab21193d119a9168d95e.jpg');
 INSERT INTO Meme (poster, title, type, content) VALUES ('User2', 'When you are no longer the frog', 'Image', 'http://gag.fm/uploads/posts/t/l-6632.jpg');
 INSERT INTO Meme (poster, title, type, content) VALUES ('User2', 'Why not both?', 'Image', 'https://i.kinja-img.com/gawker-media/image/upload/s--sXmOrBZL--/c_fit,fl_progressive,q_80,w_636/1238895886504840879.jpg');
-INSERT INTO Meme (poster, title, type, content) VALUES ('User2', 'The wrong dongerhood', 'Copypasta', '༼ ºل͟º༼ ºل͟º༼ ºل͟º ༽ºل͟º ༽ºل͟º ༽ YOU CAME TO THE WRONG DONGERHOOD༼ ºل͟º༼ ºل͟º༼ ºل͟º ༽ºل͟º ༽ºل͟º ༽');
+INSERT INTO Meme (poster, title, type, content) VALUES ('User', 'The wrong dongerhood', 'Copypasta', '༼ ºل͟º༼ ºل͟º༼ ºل͟º ༽ºل͟º ༽ºل͟º ༽ YOU CAME TO THE WRONG DONGERHOOD༼ ºل͟º༼ ºل͟º༼ ºل͟º ༽ºل͟º ༽ºل͟º ༽');
 --Favourite taulun testidata
 INSERT INTO Favourite (username, meme_id) VALUES ('User', '2');
 INSERT INTO Favourite (username, meme_id) VALUES ('User', '3');

@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
+{% if info != null %}
+<div class="alert alert-success">
+  {{info}}
+</div>
+{% endif %}
 <div>
     <h2>{{meme.title}}</h2>
     {% if meme.type == 'Image' %}
@@ -11,7 +16,7 @@
         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{meme.content}}" allowfullscreen style="frameborder:0"></iframe>
     </div>
     {% endif %}
-    Posted by: <a href="/memeDB/memes?user={{meme.poster}}">{{meme.poster}}</a>
+    Posted by: <a href="/memeDB/memes?search_phrase={{meme.poster}}&search_type=Poster">{{meme.poster}}</a>
 </div>
 <br/>
 <div>
