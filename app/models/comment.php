@@ -28,4 +28,9 @@ class Comment extends BaseModel {
         return $comments;
     }
 
+    protected function add_valitron_rules() {
+        $this->valitron->rule('required', array('poster', 'parent_meme', 'message', 'posted'));
+        $this->valitron->rule('lengthMax', 'message', 200);
+    }
+
 }

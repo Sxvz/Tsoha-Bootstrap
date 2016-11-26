@@ -72,16 +72,22 @@ class MemeController extends BaseController {
 
     public static function store() {
         $params = $_POST;
-        $meme = new Meme(array(
+        $attributes = array(
             'poster' => 'User3', //placeholder, haetaan sessiosta nykyinen käyttäjä
             'title' => $params['title'],
             'type' => $params['type'],
             'content' => $params['content'],
-        ));
-        
-        $meme->save();
-        
-        Redirect::to('/memes/'.$meme->id, array('info' => 'Operation successful!'));
+        );
+
+        $meme = new Meme($attributes);
+        $errors = $meme->errors();
+
+        if (count($errors) == 0) {
+            $meme->save();
+            Redirect::to('/memes/' . $meme->id, array('info' => 'Operation successful!'));
+        } else {
+            View::make('meme/create_meme.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
     }
 
 }

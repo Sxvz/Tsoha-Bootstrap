@@ -8,4 +8,8 @@ class User extends BaseModel {
         parent::__construct($attributes);
     }
 
+    protected function add_valitron_rules() {
+        
+    }
+
 }

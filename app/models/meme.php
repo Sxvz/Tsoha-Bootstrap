@@ -16,7 +16,7 @@ class Meme extends BaseModel {
     }
 
     public static function find_all_by_x($offset, $type, $phrase) {
-        $type = self::sanitize_type($type);
+        $type = self::sanitize_research_type($type);
         $phrase = '%' . $phrase . '%';
         $query = DB::connection()->prepare("SELECT * FROM Meme WHERE lower($type) LIKE lower(:phrase) OFFSET :offset LIMIT 10");
         $query->execute(array('phrase' => $phrase, 'offset' => $offset));
@@ -41,7 +41,7 @@ class Meme extends BaseModel {
         return $memes;
     }
 
-    private static function sanitize_type($type) {
+    private static function sanitize_research_type($type) {
         if ($type != 'Title' && $type != 'Type' && $type != 'Content' && $type != 'Poster') {
             $type = 'Title';
         }
@@ -78,7 +78,7 @@ class Meme extends BaseModel {
     }
 
     public static function count_search_results($type, $phrase) {
-        $type = self::sanitize_type($type);
+        $type = self::sanitize_research_type($type);
         $phrase = '%' . $phrase . '%';
         $query = DB::connection()->prepare("SELECT count(*) as count FROM Meme WHERE lower($type) LIKE lower(:phrase)");
         $query->execute(array('phrase' => $phrase));
@@ -92,6 +92,48 @@ class Meme extends BaseModel {
         $query->execute(array('poster' => $this->poster, 'title' => $this->title, 'type' => $this->type, 'content' => $this->content));
         $result = $query->fetch();
         $this->id = $result['id'];
+    }
+
+    protected function add_valitron_rules() {
+        $this->valitron->rule('required', array('poster', 'title', 'type', 'content'));
+        $this->valitron->rule('lengthBetween', 'title', 2, 50);
+        $this->valitron->rule('lengthBetween', 'content', 2, 500);
+
+        if ($this->type == 'Video') {
+            $this->handle_video_rules();
+        } elseif ($this->type == 'Image') {
+            $this->handle_image_rules();
+        }
+    }
+
+    private function handle_image_rules() {
+        $this->valitron->rule('urlActive', 'content');
+        $this->valitron->addRule('urlImage', function($field, $value, array $params, array $fields) {
+            try {
+                $headers = get_headers($value);
+                foreach ($headers as $header) {
+                    if (strpos($header, 'Content-Type: image/') !== false) {
+                        return true;
+                    }
+                }
+            } catch (Exception $ex) {
+                
+            }
+            return false;
+        }, 'must be an url of an image');
+        $this->valitron->rule('urlImage', 'content');
+    }
+
+    private function handle_video_rules() {
+        $this->valitron->addRule('videoId', function($field, $value, array $params, array $fields) {
+            try {
+                file_get_contents("https://www.youtube.com/oembed?url=http%3A//www.youtube.com/watch%3Fv%3D$value&format=json");
+            } catch (Exception $ex) {
+                return false;
+            }
+            return true;
+        }, 'must be a valid video id');
+        $this->valitron->rule('videoId', 'content');
     }
 
 }
