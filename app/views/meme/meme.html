@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-{% if info != null %}
+{% if info %}
 <div class="alert alert-success">
-  {{info}}
+    {{info}}
 </div>
 {% endif %}
 <div>
@@ -20,14 +20,16 @@
 </div>
 <br/>
 <div>
+    <!--tarkistetaan onko jo suosikeissa-->
     <a href="/memeDB/memes/{{meme.id}}/favorite"><button class="btn btn-success">Favourite</button></a>
+    {% if user == meme.poster %}
     <a href="/memeDB/memes/{{meme.id}}/edit"><button class="btn btn-warning">Edit</button></a>
+    {% endif %}
 </div>
 <br/>
 <div>
     <table class="table table-bordered table-striped" style="width:100%">
         <tbody>
-            <!--if logged in as poster-->
             {% for comment in comments %}
             <tr>
                 <td style="width:20%;text-align:center">{{comment.poster}}</td>
@@ -37,16 +39,13 @@
                     <br/><strong>Edited on:</strong><br/>{{comment.edited|date('d.m.Y H:i')}}
                     {% endif %}
                 </td>
+                {% if user == comment.poster %}
                 <td style="width:10%"><a href="/memeDB/comment/{{comment.id}}/edit"><button class="btn btn-warning">Edit</button></a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
             </tr>
             {% endfor %}
-            <!--if logged in as someone else
-            <tr>
-                <td style="width:20%;text-align:center">User2</td>
-                <td style="width:60%">Another message</td>
-                <td style="width:20%;text-align:center">Date</td>
-                <td></td>
-            </tr>-->
         </tbody>
     </table>
 </div>

@@ -20,8 +20,16 @@ $routes->get('/memes/:id', function($id) {
     MemeController::single_meme($id);
 });
 
-$routes->get('/memes/1/edit', function() {
-    HelloWorldController::edit_meme();
+$routes->get('/memes/:id/edit', function($id) {
+    MemeController::edit_meme($id);
+});
+
+$routes->post('/memes/:id/edit', function($id) {
+    MemeController::handle_edit($id);
+});
+
+$routes->get('/memes/:id/delete', function($id) {
+    MemeController::delete($id);
 });
 
 $routes->get('/comment/1/edit', function() {
@@ -30,4 +38,20 @@ $routes->get('/comment/1/edit', function() {
 
 $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
+});
+
+$routes->get('/login', function() {
+    UserController::login();
+});
+
+$routes->post('/login', function() {
+    UserController::handle_login();
+});
+
+$routes->get('/register', function() {
+    UserController::register();
+});
+
+$routes->post('/register', function() {
+    UserController::create_account();
 });

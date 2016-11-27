@@ -1,6 +1,6 @@
 CREATE TABLE Usr(
   username varchar(20) PRIMARY KEY,
-  password varchar(50) NOT NULL
+  password varchar(255) NOT NULL
 );
 
 CREATE TABLE Meme(

@@ -1,0 +1,17 @@
+{% macro error_display() %}
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error_class in errors %}
+        {% for error in error_class %}
+        <li>{{error}}</li>
+        {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro meme_content_help() %}
+<p class="help-block">For copypastas this is the content itself, for images the content should be a link to the image and for videos their video id (from Youtube) is enough. </p>
+{% endmacro %}

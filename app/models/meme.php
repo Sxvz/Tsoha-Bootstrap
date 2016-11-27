@@ -93,6 +93,16 @@ class Meme extends BaseModel {
         $result = $query->fetch();
         $this->id = $result['id'];
     }
+    
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Meme SET title = :title, content = :content WHERE id = :id');
+        $query->execute(array('title' => $this->title, 'content' => $this->content, 'id' => $this->id));
+    }
+    
+    public function delete() {
+        $query = DB::connection()->prepare('DELETE FROM Meme WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
 
     protected function add_valitron_rules() {
         $this->valitron->rule('required', array('poster', 'title', 'type', 'content'));

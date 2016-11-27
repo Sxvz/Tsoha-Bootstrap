@@ -6,7 +6,7 @@ class MemeController extends BaseController {
         $rnd_id = rand(1, Meme::count());
         $rnd_meme = Meme::find_one($rnd_id);
 
-        View::make('meme/front_page.html', array('meme' => $rnd_meme));
+        View::make('meme/front_page.html', array('user' => self::get_user_logged_in(), 'meme' => $rnd_meme));
     }
 
     public static function list_memes() {
@@ -59,11 +59,37 @@ class MemeController extends BaseController {
         $meme = Meme::find_one($id);
         $comments = Comment::find_by_parent_meme($id);
 
-        View::make('meme/meme.html', array('meme' => $meme, 'comments' => $comments));
+        View::make('meme/meme.html', array('user' => self::get_user_logged_in(), 'meme' => $meme, 'comments' => $comments));
     }
 
-    public static function edit_meme() {
-        View::make('plans/edit_meme.html');
+    public static function edit_meme($id) {
+        $meme = Meme::find_one($id);
+
+        if (self::get_user_logged_in() == $meme->poster) {
+            View::make('meme/edit_meme.html', array('meme' => $meme));
+        } else {
+            Redirect::to('/memeDB/', array('info' => 'nope.avi'));
+        }
+    }
+
+    public static function handle_edit($id) {
+        $meme = Meme::find_one($id);
+        $params = $_POST;
+
+        $meme->title = $params['title'];
+        $meme->content = $params['content'];
+
+        $errors = $meme->errors();
+        if (count($errors) == 0) {
+            if (self::get_user_logged_in() == $meme->poster) {
+                $meme->update();
+                Redirect::to('/memes/' . $meme->id, array('info' => 'Operation successful!'));
+            } else {
+                Redirect::to('/memeDB/', array('info' => 'nope.avi'));
+            }
+        } else {
+            View::make('meme/edit_meme.html', array('errors' => $errors, 'meme' => $meme));
+        }
     }
 
     public static function create_meme() {
@@ -73,20 +99,31 @@ class MemeController extends BaseController {
     public static function store() {
         $params = $_POST;
         $attributes = array(
-            'poster' => 'User3', //placeholder, haetaan sessiosta nykyinen käyttäjä
+            'poster' => self::get_user_logged_in(),
             'title' => $params['title'],
             'type' => $params['type'],
             'content' => $params['content'],
         );
 
         $meme = new Meme($attributes);
-        $errors = $meme->errors();
 
+        $errors = $meme->errors();
         if (count($errors) == 0) {
             $meme->save();
             Redirect::to('/memes/' . $meme->id, array('info' => 'Operation successful!'));
         } else {
             View::make('meme/create_meme.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
+    }
+
+    public static function delete($id) {
+        $meme = Meme::find_one($id);
+
+        if (self::get_user_logged_in() == $meme->poster) {
+            $meme->delete();
+            Redirect::to('/memeDB/', array('info' => 'Operation successful!'));
+        } else {
+            Redirect::to('/memeDB/', array('info' => 'nope.avi'));
         }
     }
 

@@ -1,8 +1,8 @@
 --Usr taulun testidata
-INSERT INTO Usr (username, password) VALUES ('User', 'User');
-INSERT INTO Usr (username, password) VALUES ('User2', 'User2');
-INSERT INTO Usr (username, password) VALUES ('User3', 'User3');
-INSERT INTO Usr (username, password) VALUES ('User4', 'User4');
+INSERT INTO Usr (username, password) VALUES ('User', '$2y$10$hsHXJqwWld1F51vV4oyG9u9BdFl8U82pZlyXuzDiq0JyuZww7CeBC');
+INSERT INTO Usr (username, password) VALUES ('User2', '$2y$10$3xPmhXDmrOe13fidat4ImOPtrc/NAjJA94caxmK2hAQXGaf5IfLjK');
+INSERT INTO Usr (username, password) VALUES ('User3', '$2y$10$LLn0BLGyGNtR4dxF2dwo7./ax2N/LOlWb8UUZUTKKA3X2m7fXKfGW');
+INSERT INTO Usr (username, password) VALUES ('User4', '$2y$10$Qa4XfvMDJFGVQyPgq/8XQO5u2kz6VicvF2JKTn6SHDi6tGGFOJtci');
 --Meme taulun testidata
 INSERT INTO Meme (poster, title, type, content) VALUES ('User', 'Homer into the bushes', 'Image', 'https://fat.gfycat.com/OptimalThoseFoal.gif');
 INSERT INTO Meme (poster, title, type, content) VALUES ('User', 'Lenny Face', 'Copypasta', '( ͡° ͜ʖ ͡°)');

@@ -5,12 +5,20 @@
         <div>
             <h2>memeDB <small>Don't let your memes be dreams</small></h2>
         </div>
+        {% if user %}
         <div>
-            <h3>Currently logged in as: <small>User</small></h3>
-            <a href="/memeDB"><button class="btn btn-default" style="width:100%">Favourites</button></a>
-            <a href="/memeDB/memes?search_type=user&search_phrase=User"><button class="btn btn-default" style="width:100%">Own Memes</button></a>
+            <h3>Currently logged in as: <small>{{user}}</small></h3>
+            <a href="/memeDB/favourites"><button class="btn btn-default" style="width:100%">Favourites</button></a>
+            <a href="/memeDB/memes?search_type=Poster&search_phrase={{user}}"><button class="btn btn-default" style="width:100%">Own Memes</button></a>
             <a href="/memeDB/memes/create"><button class="btn btn-success" style="width:100%">Add a new meme</button></a>
         </div>
+        {% else %}
+        <div>
+            <h3>You are currently not logged in</h3>
+            <a href="/memeDB/login"><button class="btn btn-primary" style="width:100%">Log in</button></a>   
+            <a href="/memeDB/register"><button class="btn btn-primary" style="width:100%">Register</button></a>   
+        </div>
+        {% endif %}
         <div>
             <a href="/memeDB/memes"><button class="btn btn-primary" style="width:100%">Memes</button></a>
         </div>
