@@ -1,8 +1,8 @@
 --Usr taulun testidata
-INSERT INTO Usr (username, password) VALUES ('User', '$2y$10$hsHXJqwWld1F51vV4oyG9u9BdFl8U82pZlyXuzDiq0JyuZww7CeBC');
-INSERT INTO Usr (username, password) VALUES ('User2', '$2y$10$3xPmhXDmrOe13fidat4ImOPtrc/NAjJA94caxmK2hAQXGaf5IfLjK');
-INSERT INTO Usr (username, password) VALUES ('User3', '$2y$10$LLn0BLGyGNtR4dxF2dwo7./ax2N/LOlWb8UUZUTKKA3X2m7fXKfGW');
-INSERT INTO Usr (username, password) VALUES ('User4', '$2y$10$Qa4XfvMDJFGVQyPgq/8XQO5u2kz6VicvF2JKTn6SHDi6tGGFOJtci');
+INSERT INTO Usr (username, password) VALUES ('User', '$1$lG9rCrnj$xbwbkofKuG5gfB6VQIFDz1');
+INSERT INTO Usr (username, password) VALUES ('User2', '$1$AAfoADve$Vf7BW2exgqu971KD7llcV/');
+INSERT INTO Usr (username, password) VALUES ('User3', '$1$.R.aJdRE$luTuITRA.f5BwGuov4Wll0');
+INSERT INTO Usr (username, password) VALUES ('User4', '$1$RILlLIeU$9Ae1ufNl71rdceIKWeN4S1');
 --Meme taulun testidata
 INSERT INTO Meme (poster, title, type, content) VALUES ('User', 'Homer into the bushes', 'Image', 'https://fat.gfycat.com/OptimalThoseFoal.gif');
 INSERT INTO Meme (poster, title, type, content) VALUES ('User', 'Lenny Face', 'Copypasta', '( ͡° ͜ʖ ͡°)');

@@ -1,34 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-<div>
+{% import "macros/forms.html" as forms %}
+<div align="center">
     <h1>Log in to your account</h1>
+    <br/>
 
-    {% if error %}
-    <div class="alert alert-danger">
-        {{error}}
-    </div>
-    {% endif %}
-    {% if info %}
-    <div class="alert alert-success">
-        {{info}}
-    </div>
-    {% endif %}
+    {{forms.info_display(info, error)}}
 
     <form method="post" action="/memeDB/login">
-        <div class="form-group">
-            <label>Username</label>
-            <input class="form-control" name="username" value="{{username}}" type="text">
-        </div>
+        {{forms.login_form_username()}}
 
-        <div class="form-group">
-            <label>Password</label>
-            <input class="form-control" name="password" type="password">
-        </div>
+        {{forms.login_form_password()}}
 
         <button type="submit" class="btn btn-primary">Log in</button>
     </form>
-</div>
-<div>
+    <br/>
+    <br/>
     <p>Don't have an account? <a href="/memeDB/register" style="color:blue">Create an account.</a></p>
 </div>
 {% endblock %}

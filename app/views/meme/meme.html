@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-{% if info %}
-<div class="alert alert-success">
-    {{info}}
-</div>
-{% endif %}
+{% import "macros/forms.html" as forms %}
+{{forms.info_display(info, error)}}
 <div>
     <h2>{{meme.title}}</h2>
     {% if meme.type == 'Image' %}
@@ -20,10 +17,12 @@
 </div>
 <br/>
 <div>
+    {% if user %}
     <!--tarkistetaan onko jo suosikeissa-->
     <a href="/memeDB/memes/{{meme.id}}/favorite"><button class="btn btn-success">Favourite</button></a>
     {% if user == meme.poster %}
     <a href="/memeDB/memes/{{meme.id}}/edit"><button class="btn btn-warning">Edit</button></a>
+    {% endif %}
     {% endif %}
 </div>
 <br/>
@@ -49,8 +48,10 @@
         </tbody>
     </table>
 </div>
+{% if user %}
 <form action="/memeDB/message/send" method="post">
     <textarea class="form-control" rows="5" id="message"></textarea>
     <button type="submit" class="btn btn-default">Send</button>
 </form>
+{% endif %}
 {% endblock %}

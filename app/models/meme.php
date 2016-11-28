@@ -3,14 +3,15 @@
 class Meme extends BaseModel {
 
     public $id, $poster, $title, $type, $content;
+    private static $entries_per_page = 10;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
     }
 
     public static function find_all($offset) {
-        $query = DB::connection()->prepare('SELECT * FROM Meme OFFSET :offset LIMIT 10');
-        $query->execute(array('offset' => $offset));
+        $query = DB::connection()->prepare('SELECT * FROM Meme ORDER BY id DESC OFFSET :offset LIMIT :limit');
+        $query->execute(array('offset' => $offset, 'limit' => self::$entries_per_page));
 
         return self::fetch($query);
     }
@@ -18,8 +19,8 @@ class Meme extends BaseModel {
     public static function find_all_by_x($offset, $type, $phrase) {
         $type = self::sanitize_research_type($type);
         $phrase = '%' . $phrase . '%';
-        $query = DB::connection()->prepare("SELECT * FROM Meme WHERE lower($type) LIKE lower(:phrase) OFFSET :offset LIMIT 10");
-        $query->execute(array('phrase' => $phrase, 'offset' => $offset));
+        $query = DB::connection()->prepare("SELECT * FROM Meme WHERE lower($type) LIKE lower(:phrase) ORDER BY id DESC OFFSET :offset LIMIT :limit");
+        $query->execute(array('phrase' => $phrase, 'offset' => $offset, 'limit' => self::$entries_per_page));
 
         return self::fetch($query);
     }
@@ -93,12 +94,12 @@ class Meme extends BaseModel {
         $result = $query->fetch();
         $this->id = $result['id'];
     }
-    
+
     public function update() {
         $query = DB::connection()->prepare('UPDATE Meme SET title = :title, content = :content WHERE id = :id');
         $query->execute(array('title' => $this->title, 'content' => $this->content, 'id' => $this->id));
     }
-    
+
     public function delete() {
         $query = DB::connection()->prepare('DELETE FROM Meme WHERE id = :id');
         $query->execute(array('id' => $this->id));
@@ -137,13 +138,23 @@ class Meme extends BaseModel {
     private function handle_video_rules() {
         $this->valitron->addRule('videoId', function($field, $value, array $params, array $fields) {
             try {
-                file_get_contents("https://www.youtube.com/oembed?url=http%3A//www.youtube.com/watch%3Fv%3D$value&format=json");
+                $result = file_get_contents("https://www.youtube.com/oembed?url=http%3A//www.youtube.com/watch%3Fv%3D$value&format=json");
             } catch (Exception $ex) {
-                return false;
             }
-            return true;
+            if (isset($result)) {
+                return true;
+            }
+            return false;
         }, 'must be a valid video id');
         $this->valitron->rule('videoId', 'content');
+    }
+
+    protected function setup_valitron() {
+        $attributes = array('poster' => $this->poster,
+            'title' => $this->title,
+            'type' => $this->type,
+            'content' => $this->content);
+        $this->valitron = new Valitron\Validator($attributes);
     }
 
 }

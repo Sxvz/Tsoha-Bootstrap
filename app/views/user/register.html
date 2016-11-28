@@ -1,26 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 {% import "macros/forms.html" as forms %}
-<div>
+<div align="center">
     <h1>Register an account</h1>
 
-    {{forms.error_display()}}
+    {{forms.error_display(errors)}}
 
     <form method="post" action="/memeDB/register">
-        <div class="form-group">
-            <label>Username</label>
-            <input class="form-control" name="username" type="text">
-        </div>
+        {{forms.login_form_username()}}
 
-        <div class="form-group">
-            <label>Password</label>
-            <input class="form-control" name="password" type="password">
-        </div>
-        
-        <div class="form-group">
-            <label>Confirm your password</label>
-            <input class="form-control" name="password_confirm" type="password">
-        </div>
+        {{forms.login_form_password()}}
+
+        {{forms.login_form_password("Confirm your password", "password_confirm")}}
 
         <button type="submit" class="btn btn-primary">Register</button>
     </form>

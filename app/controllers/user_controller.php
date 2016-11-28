@@ -1,6 +1,6 @@
 <?php
 
-class MemeController extends BaseController {
+class UserController extends BaseController {
 
     public static function login() {
         View::make('user/login.html');
@@ -16,7 +16,7 @@ class MemeController extends BaseController {
         } else {
             $_SESSION['user'] = $user->username;
 
-            Redirect::to('/memeDB/');
+            Redirect::to('/');
         }
     }
 
@@ -29,15 +29,16 @@ class MemeController extends BaseController {
         $attributes = array(
             'username' => $params['username'],
             'password' => $params['password'],
-            'content' => $params['content'],
+            'password_confirm' => $params['password_confirm'],
         );
 
         $user = new User($attributes);
         $errors = $user->errors();
-
+        
         if (count($errors) == 0) {
-            $user->save();
-            Redirect::to('/memeDB/login' . $meme->id, array('info' => 'Operation successful!', 'username' => $user->username));
+            //$user->save();
+            //Redirect::to('/login', array('info' => 'Operation successful!', 'username' => $user->username));
+            View::make('user/register.html', array('errors' => $errors));
         } else {
             View::make('user/register.html', array('errors' => $errors));
         }

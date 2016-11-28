@@ -13,15 +13,17 @@ abstract class BaseModel {
                 $this->{$attribute} = $value;
             }
         }
-        $this->valitron = new Valitron\Validator($attributes);
     }
 
     public function errors() {
+        $this->setup_valitron();
         $this->add_valitron_rules();
         $this->valitron->validate();
-        
+
         return $this->valitron->errors();
     }
+
+    abstract protected function setup_valitron();
 
     abstract protected function add_valitron_rules();
 }

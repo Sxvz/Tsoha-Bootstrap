@@ -68,7 +68,7 @@ class MemeController extends BaseController {
         if (self::get_user_logged_in() == $meme->poster) {
             View::make('meme/edit_meme.html', array('meme' => $meme));
         } else {
-            Redirect::to('/memeDB/', array('info' => 'nope.avi'));
+            Redirect::to('/', array('info' => 'nope.avi'));
         }
     }
 
@@ -78,14 +78,14 @@ class MemeController extends BaseController {
 
         $meme->title = $params['title'];
         $meme->content = $params['content'];
-
+        
         $errors = $meme->errors();
         if (count($errors) == 0) {
             if (self::get_user_logged_in() == $meme->poster) {
                 $meme->update();
                 Redirect::to('/memes/' . $meme->id, array('info' => 'Operation successful!'));
             } else {
-                Redirect::to('/memeDB/', array('info' => 'nope.avi'));
+                Redirect::to('/', array('error' => 'nope.avi'));
             }
         } else {
             View::make('meme/edit_meme.html', array('errors' => $errors, 'meme' => $meme));
@@ -121,9 +121,9 @@ class MemeController extends BaseController {
 
         if (self::get_user_logged_in() == $meme->poster) {
             $meme->delete();
-            Redirect::to('/memeDB/', array('info' => 'Operation successful!'));
+            Redirect::to('/', array('info' => 'Operation successful!'));
         } else {
-            Redirect::to('/memeDB/', array('info' => 'nope.avi'));
+            Redirect::to('/', array('error' => 'nope.avi'));
         }
     }
 

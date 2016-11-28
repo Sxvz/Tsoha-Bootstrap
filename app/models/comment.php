@@ -33,4 +33,12 @@ class Comment extends BaseModel {
         $this->valitron->rule('lengthMax', 'message', 200);
     }
 
+    protected function setup_valitron() {
+        $attributes = array('poster' => $this->poster,
+            'parent_meme' => $this->parent_meme,
+            'message' => $this->message,
+            'posted' => $this->posted);
+        $this->valitron = new Valitron\Validator($attributes);
+    }
+
 }
