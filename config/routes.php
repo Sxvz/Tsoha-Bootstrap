@@ -55,3 +55,7 @@ $routes->get('/register', function() {
 $routes->post('/register', function() {
     UserController::create_account();
 });
+
+$routes->get('/message/1/edit', function() {
+    HelloWorldController::edit_message();
+});

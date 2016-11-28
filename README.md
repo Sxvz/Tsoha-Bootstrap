@@ -12,13 +12,13 @@
 - [Rekisteröitymissivu](http://sobackr.users.cs.helsinki.fi/memeDB/register)
 - [Meemien listaussivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes)
 - [Meemin esittelysivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes/1)
+- [Viestin muokkaussivu](http://sobackr.users.cs.helsinki.fi/memeDB/message/1/edit)
 
 ####Vaatii kirjautumisen:
 - [Meemien luontisivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes/create)
 
 ####Vaatii kirjautumisen käyttäjällä "User":
 - [Meemin muokkaussivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes/1/edit)
-- [Viestin muokkaussivu](http://sobackr.users.cs.helsinki.fi/memeDB/message/1/edit)
 
 ###Käyttäjätunnuksia testaukseen (username, password):
 - User, User

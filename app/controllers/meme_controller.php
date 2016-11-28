@@ -68,7 +68,7 @@ class MemeController extends BaseController {
         if (self::get_user_logged_in() == $meme->poster) {
             View::make('meme/edit_meme.html', array('meme' => $meme));
         } else {
-            Redirect::to('/', array('info' => 'nope.avi'));
+            Redirect::to('/', array('error' => 'nope.avi'));
         }
     }
 

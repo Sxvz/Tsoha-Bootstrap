@@ -27,27 +27,6 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-//        $meme = new Meme(array(
-//            'poster' => 'User3', //placeholder, haetaan sessiosta nykyinen käyttäjä
-//            'title' => 'Seppo',
-//            'type' => 'Video',
-//            //'content' => 'seppo',
-//            'content' => 'https://fat.gfycat.com/OptimalThoseFoal.gif',
-//        ));
-//        
-//        Kint::dump($meme->errors());
-
-//        $value = 'https://fat.gfycat.com/OptimalThoseFoal.gif';
-//        //$value = 'seppo';
-//        try {
-//            $headers = get_headers($value);
-//            Kint::dump($headers);
-//            foreach ($headers as $header) {
-//                Kint::dump(strpos($header, 'Content-Type: image/') !== false);
-//            }
-//        } catch (Exception $ex) {
-//            Kint::dump($ex);
-//        }
 
         View::make('sandbox.html');
     }
