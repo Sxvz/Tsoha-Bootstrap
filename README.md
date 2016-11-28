@@ -1,18 +1,30 @@
 # Tietokantasovelluksen esittelysivu
 
-Yleisiä linkkejä:
+###Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://sobackr.users.cs.helsinki.fi/memeDB/)
 * [Linkki dokumentaatiooni](doc/dokumentaatio.pdf)
 
-Pikalinkkejä:
+###Pikalinkkejä:
 
 - [Etusivu](http://sobackr.users.cs.helsinki.fi/memeDB/)
+- [Kirjautumissivu](http://sobackr.users.cs.helsinki.fi/memeDB/login)
+- [Rekisteröitymissivu](http://sobackr.users.cs.helsinki.fi/memeDB/register)
 - [Meemien listaussivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes)
-- [Meemien luontisivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes/create)
 - [Meemin esittelysivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes/1)
+
+####Vaatii kirjautumisen:
+- [Meemien luontisivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes/create)
+
+####Vaatii kirjautumisen käyttäjällä "User":
 - [Meemin muokkaussivu](http://sobackr.users.cs.helsinki.fi/memeDB/memes/1/edit)
 - [Viestin muokkaussivu](http://sobackr.users.cs.helsinki.fi/memeDB/message/1/edit)
+
+###Käyttäjätunnuksia testaukseen (username, password):
+- User, User
+- User2, User2
+- User3, User3
+- User4, User4
 
 ## Työn aihe
 
