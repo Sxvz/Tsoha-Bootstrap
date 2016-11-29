@@ -12,7 +12,7 @@ class User extends BaseModel {
         $user = self::find_by_username($username);
 
         //if (password_verify($password, $user->password)) { //php 5.5+ tarvitaan (laitoksen koneilla liian käpynen versio)
-        if ($user->password === crypt($password, $user->password)) {
+        if ($user != null && $user->password === crypt($password, $user->password)) {
             return $user;
         }
 

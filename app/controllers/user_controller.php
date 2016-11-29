@@ -36,9 +36,8 @@ class UserController extends BaseController {
         $errors = $user->errors();
         
         if (count($errors) == 0) {
-            //$user->save();
-            //Redirect::to('/login', array('info' => 'Operation successful!', 'username' => $user->username));
-            View::make('user/register.html', array('errors' => $errors));
+            $user->save();
+            Redirect::to('/login', array('info' => 'Operation successful!', 'username' => $user->username));
         } else {
             View::make('user/register.html', array('errors' => $errors));
         }
