@@ -8,7 +8,7 @@ CREATE TABLE Meme(
   poster varchar(20) REFERENCES Usr(username) ON DELETE CASCADE,
   title varchar(50) NOT NULL,
   type varchar(10) NOT NULL,
-  content varchar(500) NOT NULL
+  content varchar(1000) NOT NULL
 );
 
 CREATE TABLE Favourite(
