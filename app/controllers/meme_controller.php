@@ -4,12 +4,17 @@ class MemeController extends BaseController {
 
     public static function index() {
         $ids = Meme::find_all_ids();
+        $rnd_meme = null;
         if ($ids != null) {
             $rnd_indx = rand(0, count($ids) - 1);
             $rnd_meme = Meme::find_one($ids[$rnd_indx][0]);
         }
-        
-        View::make('meme/front_page.html', array('user' => self::get_user_logged_in(), 'meme' => $rnd_meme));
+
+        if ($rnd_meme == null) {
+            View::make('meme/front_page.html', array('user' => self::get_user_logged_in()));
+        } else {
+            View::make('meme/front_page.html', array('user' => self::get_user_logged_in(), 'meme' => $rnd_meme));
+        }
     }
 
     public static function list_memes() {
