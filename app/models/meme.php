@@ -104,6 +104,13 @@ class Meme extends BaseModel {
         $query = DB::connection()->prepare('DELETE FROM Meme WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }
+    
+    public static function find_all_ids() {
+        $query = DB::connection()->prepare('SELECT id FROM Meme');
+        $query->execute();
+
+        return $query->fetchAll();
+    }
 
     protected function add_valitron_rules() {
         $this->valitron->rule('required', array('poster', 'title', 'type', 'content'));

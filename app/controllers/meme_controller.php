@@ -3,12 +3,12 @@
 class MemeController extends BaseController {
 
     public static function index() {
-        $rnd_meme = null;
-        while ($rnd_meme == null) {
-            $rnd_id = rand(1, Meme::count());
-            $rnd_meme = Meme::find_one($rnd_id);
+        $ids = Meme::find_all_ids();
+        if ($ids != null) {
+            $rnd_indx = rand(0, count($ids) - 1);
+            $rnd_meme = Meme::find_one($ids[$rnd_indx][0]);
         }
-
+        
         View::make('meme/front_page.html', array('user' => self::get_user_logged_in(), 'meme' => $rnd_meme));
     }
 
