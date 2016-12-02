@@ -20,11 +20,13 @@ class MemeController extends BaseController {
     public static function list_memes() {
         $params = $_GET;
         $additional_params = '';
-        $current_page = 0;
+        $current_page = 1;
+        $type = null;
+        $phrase = null;
         if (isset($params['page'])) {
-            $current_page = $params['page'] - 1;
+            $current_page = $params['page'];
         }
-        $offset = 10 * $current_page;
+        $offset = 10 * ($current_page - 1);
 
         if (isset($params['search_phrase'])) {
             $type = $params['search_type'];
@@ -40,7 +42,7 @@ class MemeController extends BaseController {
         self::prepare_content_previews($memes);
         $pages = self::count_pages($count);
 
-        View::make('meme/memes.html', array('memes' => $memes, 'pages' => $pages, 'additional_params' => $additional_params, 'search_type' => $type, 'search_phrase' => $phrase, 'user' => self::get_user_logged_in()));
+        View::make('meme/memes.html', array('memes' => $memes, 'pages' => $pages, 'current_page' => $current_page, 'additional_params' => $additional_params, 'search_type' => $type, 'search_phrase' => $phrase, 'user' => self::get_user_logged_in()));
     }
 
     private static function prepare_content_previews($memes) {

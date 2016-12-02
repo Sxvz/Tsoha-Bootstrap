@@ -59,7 +59,11 @@
 <ul class="list-inline">
     <li><strong>Pages:</strong></li>
     {% for page in pages %}
+    {% if page == current_page %}
+    <li>{{page}}</li>
+    {% else %}
     <li><a href="/memeDB/memes?page={{page}}{{additional_params}}" style="color:green">{{page}}</a></li>
+    {% endif %}
     {% endfor %}
 </ul>
 {% endblock %}
