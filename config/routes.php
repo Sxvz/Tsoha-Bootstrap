@@ -48,14 +48,14 @@ $routes->post('/login', function() {
     UserController::handle_login();
 });
 
+$routes->get('/logout', function() {
+    UserController::logout();
+});
+
 $routes->get('/register', function() {
     UserController::register();
 });
 
 $routes->post('/register', function() {
     UserController::create_account();
-});
-
-$routes->get('/message/1/edit', function() {
-    HelloWorldController::edit_message();
 });

@@ -9,9 +9,9 @@
         </div>
         {% if user %}
         <div>
-            <h3>Currently logged in as: <small>{{user}}</small></h3>
+            <h3>Currently logged in as: <small>{{user.username}}</small></h3>
             <a href="/memeDB/favourites"><button class="btn btn-default" style="width:100%">Favourites</button></a>
-            <a href="/memeDB/memes?search_type=Poster&search_phrase={{user}}"><button class="btn btn-default" style="width:100%">Own Memes</button></a>
+            <a href="/memeDB/memes?search_type=Poster&search_phrase={{user.username}}"><button class="btn btn-default" style="width:100%">Own Memes</button></a>
             <a href="/memeDB/memes/create"><button class="btn btn-success" style="width:100%">Add a new meme</button></a>
         </div>
         {% else %}

@@ -30,7 +30,7 @@ class Comment extends BaseModel {
 
     protected function add_valitron_rules() {
         $this->valitron->rule('required', array('poster', 'parent_meme', 'message', 'posted'));
-        $this->valitron->rule('lengthMax', 'message', 200);
+        $this->valitron->rule('lengthBetween', 'message', 1, 200);
     }
 
     protected function setup_valitron() {

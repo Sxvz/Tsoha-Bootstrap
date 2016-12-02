@@ -20,7 +20,7 @@
     {% if user %}
     <!--tarkistetaan onko jo suosikeissa-->
     <a href="/memeDB/memes/{{meme.id}}/favorite"><button class="btn btn-success">Favourite</button></a>
-    {% if user == meme.poster %}
+    {% if user.username == meme.poster %}
     <a href="/memeDB/memes/{{meme.id}}/edit"><button class="btn btn-warning">Edit</button></a>
     {% endif %}
     {% endif %}
@@ -38,7 +38,7 @@
                     <br/><strong>Edited on:</strong><br/>{{comment.edited|date('d.m.Y H:i')}}
                     {% endif %}
                 </td>
-                {% if user == comment.poster %}
+                {% if user.username == comment.poster %}
                 <td style="width:10%"><a href="/memeDB/comment/{{comment.id}}/edit"><button class="btn btn-warning">Edit</button></a></td>
                 {% else %}
                 <td></td>

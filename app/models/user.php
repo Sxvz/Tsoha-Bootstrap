@@ -56,7 +56,7 @@ class User extends BaseModel {
         $user = $this;
         $this->valitron->addRule('usernameUnique', function($field, $value, array $params, array $fields) use($user) {
             return $user->is_username_unique();
-        }, 'is already in use.');
+        }, 'is already in use');
         $this->valitron->rule('usernameUnique', 'username');
         //$this->valitron->rule('alphaNum', 'username');
         $this->valitron->rule('equals', 'password', 'password_confirm')->message('Passwords must match');

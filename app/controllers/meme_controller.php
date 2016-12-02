@@ -40,13 +40,13 @@ class MemeController extends BaseController {
         self::prepare_content_previews($memes);
         $pages = self::count_pages($count);
 
-        View::make('meme/memes.html', array('memes' => $memes, 'pages' => $pages, 'additional_params' => $additional_params));
+        View::make('meme/memes.html', array('memes' => $memes, 'pages' => $pages, 'additional_params' => $additional_params, 'user' => self::get_user_logged_in()));
     }
 
     private static function prepare_content_previews($memes) {
         foreach ($memes as $meme) {
             if ($meme->type == 'Copypasta' && strlen($meme->content) > 50) {
-                $meme->content = mb_substr($meme->content, 0, 50, 'UTF-8');
+                $meme->content = mb_substr($meme->content, 0, 50, 'UTF-8') . '...';
             }
         }
     }
@@ -71,16 +71,20 @@ class MemeController extends BaseController {
     }
 
     public static function edit_meme($id) {
+        self::check_logged_in();
+        
         $meme = Meme::find_one($id);
 
-        if (self::get_user_logged_in() == $meme->poster) {
-            View::make('meme/edit_meme.html', array('meme' => $meme));
+        if (self::get_user_logged_in()->username == $meme->poster) {
+            View::make('meme/edit_meme.html', array('meme' => $meme, 'user' => self::get_user_logged_in()));
         } else {
             Redirect::to('/', array('error' => 'nope.avi'));
         }
     }
 
     public static function handle_edit($id) {
+        self::check_logged_in();
+        
         $meme = Meme::find_one($id);
         $params = $_POST;
 
@@ -89,25 +93,29 @@ class MemeController extends BaseController {
 
         $errors = $meme->errors();
         if (count($errors) == 0) {
-            if (self::get_user_logged_in() == $meme->poster) {
+            if (self::get_user_logged_in()->username == $meme->poster) {
                 $meme->update();
                 Redirect::to('/memes/' . $meme->id, array('info' => 'Operation successful!'));
             } else {
                 Redirect::to('/', array('error' => 'nope.avi'));
             }
         } else {
-            View::make('meme/edit_meme.html', array('errors' => $errors, 'meme' => $meme));
+            View::make('meme/edit_meme.html', array('errors' => $errors, 'meme' => $meme, 'user' => self::get_user_logged_in()));
         }
     }
 
     public static function create_meme() {
-        View::make('meme/create_meme.html');
+        self::check_logged_in();
+        
+        View::make('meme/create_meme.html', array('user' => self::get_user_logged_in()));
     }
 
     public static function store() {
+        self::check_logged_in();
+        
         $params = $_POST;
         $attributes = array(
-            'poster' => self::get_user_logged_in(),
+            'poster' => self::get_user_logged_in()->username,
             'title' => $params['title'],
             'type' => $params['type'],
             'content' => $params['content'],
@@ -120,14 +128,16 @@ class MemeController extends BaseController {
             $meme->save();
             Redirect::to('/memes/' . $meme->id, array('info' => 'Operation successful!'));
         } else {
-            View::make('meme/create_meme.html', array('errors' => $errors, 'attributes' => $attributes));
+            Redirect::to('/memes/create', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
     public static function delete($id) {
+        self::check_logged_in();
+        
         $meme = Meme::find_one($id);
 
-        if (self::get_user_logged_in() == $meme->poster) {
+        if (self::get_user_logged_in()->username == $meme->poster) {
             $meme->delete();
             Redirect::to('/', array('info' => 'Operation successful!'));
         } else {

@@ -22,8 +22,8 @@ class HelloWorldController extends BaseController {
         View::make('plans/create_meme.html');
     }
 
-    public static function edit_message() {
-        View::make('plans/edit_message.html');
+    public static function edit_comment() {
+        View::make('plans/edit_comment.html');
     }
 
     public static function sandbox() {

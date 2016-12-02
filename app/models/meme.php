@@ -13,7 +13,7 @@ class Meme extends BaseModel {
         $query = DB::connection()->prepare('SELECT * FROM Meme ORDER BY id DESC OFFSET :offset LIMIT :limit');
         $query->execute(array('offset' => $offset, 'limit' => self::$entries_per_page));
 
-        return self::fetch($query);
+        return self::fetchMany($query);
     }
 
     public static function find_all_by_x($offset, $type, $phrase) {
@@ -22,10 +22,10 @@ class Meme extends BaseModel {
         $query = DB::connection()->prepare("SELECT * FROM Meme WHERE lower($type) LIKE lower(:phrase) ORDER BY id DESC OFFSET :offset LIMIT :limit");
         $query->execute(array('phrase' => $phrase, 'offset' => $offset, 'limit' => self::$entries_per_page));
 
-        return self::fetch($query);
+        return self::fetchMany($query);
     }
 
-    private static function fetch($query) {
+    private static function fetchMany($query) {
         $rows = $query->fetchAll();
         $memes = array();
 
@@ -135,7 +135,6 @@ class Meme extends BaseModel {
                     }
                 }
             } catch (Exception $ex) {
-                
             }
             return false;
         }, 'must be an url of an image');

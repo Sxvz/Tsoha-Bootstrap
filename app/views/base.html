@@ -42,14 +42,15 @@
                         <li><a href="{{base_path}}">Front page</a></li>
                         <li><a href="/memeDB/memes">Memes</a></li>
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user %}
+                        <li><a href="/memeDB/logout">Log out ({{user.username}})</a></li>
+                        {% else %}
+                        <li><a href="/memeDB/login">Log in</a></li>
+                        {% endif %}
+                    </ul>
                 </div>
 
-                <!--<div style="direction: rtl;">
-                    <button class="btn btn-primary">Log in</button>
-                </div>
-                <div style="direction: rtl;">
-                    <button class="btn btn-warning">Log out</button>
-                </div>-->
             </div>
         </nav>
 
