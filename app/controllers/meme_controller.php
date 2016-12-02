@@ -40,7 +40,7 @@ class MemeController extends BaseController {
         self::prepare_content_previews($memes);
         $pages = self::count_pages($count);
 
-        View::make('meme/memes.html', array('memes' => $memes, 'pages' => $pages, 'additional_params' => $additional_params, 'user' => self::get_user_logged_in()));
+        View::make('meme/memes.html', array('memes' => $memes, 'pages' => $pages, 'additional_params' => $additional_params, 'search_type' => $type, 'search_phrase' => $phrase, 'user' => self::get_user_logged_in()));
     }
 
     private static function prepare_content_previews($memes) {

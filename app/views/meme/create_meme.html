@@ -14,13 +14,14 @@
         <label>Type</label>
         <select name="type" class="form-control">
             <option>Copypasta</option>
-            <option {% if attributes.type == "Image" %} selected{% endif %}>Image</option>
-            <option {% if attributes.type == "Video" %} selected{% endif %}>Video</option>
+            <option {% if attributes.type == "Image" %}selected{% endif %}>Image</option>
+            <option {% if attributes.type == "Video" %}selected{% endif %}>Video</option>
         </select>
     </div>
     <div class="form-group">
         <label>Content</label>
-        <input name="content" type="text" class="form-control" value="{{attributes.content}}">
+        <textarea class="form-control" rows="5" name="content">{{attributes.content}}</textarea>
+        <!--<input name="content" type="text" class="form-control" value="{{attributes.content}}">-->
         {{forms.meme_content_help()}}
     </div>
     <button type="submit" class="btn btn-success">Add</button>

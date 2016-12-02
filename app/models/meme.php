@@ -18,7 +18,9 @@ class Meme extends BaseModel {
 
     public static function find_all_by_x($offset, $type, $phrase) {
         $type = self::sanitize_research_type($type);
-        $phrase = '%' . $phrase . '%';
+        if ($type != 'Poster') {
+            $phrase = '%' . $phrase . '%';
+        }
         $query = DB::connection()->prepare("SELECT * FROM Meme WHERE lower($type) LIKE lower(:phrase) ORDER BY id DESC OFFSET :offset LIMIT :limit");
         $query->execute(array('phrase' => $phrase, 'offset' => $offset, 'limit' => self::$entries_per_page));
 
@@ -104,7 +106,7 @@ class Meme extends BaseModel {
         $query = DB::connection()->prepare('DELETE FROM Meme WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }
-    
+
     public static function find_all_ids() {
         $query = DB::connection()->prepare('SELECT id FROM Meme');
         $query->execute();
@@ -135,6 +137,7 @@ class Meme extends BaseModel {
                     }
                 }
             } catch (Exception $ex) {
+                
             }
             return false;
         }, 'must be an url of an image');
@@ -146,6 +149,7 @@ class Meme extends BaseModel {
             try {
                 $result = file_get_contents("https://www.youtube.com/oembed?url=http%3A//www.youtube.com/watch%3Fv%3D$value&format=json");
             } catch (Exception $ex) {
+                
             }
             if (isset($result)) {
                 return true;

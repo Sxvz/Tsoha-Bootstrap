@@ -2,7 +2,7 @@
 {% block content %}
 <form class="form-inline" action="" method="get">
     <div class="col-xs-12 col-md-8 form-group">
-        <input name="search_phrase" type="search" class="form-control" style="width:100%">
+        <input name="search_phrase" type="search" class="form-control" value="{{search_phrase}}" style="width:100%">
     </div>
     <div class="col-xs-12 col-md-4 form-group">
         <div class="row">
@@ -12,9 +12,9 @@
             <div class="col-xs-8 col-md-4">
                 <select name="search_type" class="form-control" id="search_type" style="width:100%">
                     <option>Title</option>
-                    <option>Type</option>
-                    <option>Content</option>
-                    <option>Poster</option>
+                    <option {% if search_type == "Type" %}selected{% endif %}>Type</option>
+                    <option {% if search_type == "Content" %}selected{% endif %}>Content</option>
+                    <option {% if search_type == "Poster" %}selected{% endif %}>Poster</option>
                 </select>
             </div>
             <div class="col-xs-4 col-md-4">
