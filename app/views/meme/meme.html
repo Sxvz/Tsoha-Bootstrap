@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 {% import "macros/forms.html" as forms %}
+
 {{forms.info_display(info, error)}}
+{{forms.error_display(errors)}}
+
 <div>
     <h2>{{meme.title}}</h2>
     {% if meme.type == 'Image' %}
@@ -49,8 +52,9 @@
     </table>
 </div>
 {% if user %}
-<form action="/memeDB/message/send" method="post">
-    <textarea class="form-control" rows="5" id="message"></textarea>
+<form action="/memeDB/comment/create" method="post">
+    <textarea class="form-control" rows="5" name="message">{{failed_message}}</textarea>
+    <input name="parent_meme" type="hidden" class="form-control" value="{{meme.id}}">
     <button type="submit" class="btn btn-default">Send</button>
 </form>
 {% endif %}

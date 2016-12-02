@@ -63,7 +63,7 @@ class Meme extends BaseModel {
                 'poster' => $row['poster'],
                 'title' => $row['title'],
                 'type' => $row['type'],
-                'content' => $row['content'],
+                'content' => $row['content']
             ));
 
             return $meme;

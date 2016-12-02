@@ -120,7 +120,7 @@ class MemeController extends BaseController {
             'poster' => self::get_user_logged_in()->username,
             'title' => $params['title'],
             'type' => $params['type'],
-            'content' => $params['content'],
+            'content' => $params['content']
         );
 
         $meme = new Meme($attributes);
