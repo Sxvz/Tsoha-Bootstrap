@@ -53,6 +53,7 @@ class CommentController extends BaseController {
             $comment->save();
             Redirect::to('/memes/' . $params['parent_meme'], array('info' => 'Operation successful!'));
         } else {
+            //View::make('meme/meme.html', array('errors' => $errors, 'failed_message' => $attributes['message']));
             Redirect::to('/memes/' . $params['parent_meme'], array('errors' => $errors, 'failed_message' => $attributes['message']));
         }
     }

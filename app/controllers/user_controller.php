@@ -16,7 +16,7 @@ class UserController extends BaseController {
         $user = User::authenticate($params['username'], $params['password']);
 
         if (!$user) {
-            View::make('user/login.html', array('error' => 'Wrong username or password', 'username' => $params['username']));
+            Redirect::to('/login', array('error' => 'Wrong username or password', 'username' => $params['username']));
         } else {
             $_SESSION['user'] = $user->username;
 
@@ -47,7 +47,7 @@ class UserController extends BaseController {
             $user->save();
             Redirect::to('/login', array('info' => 'Operation successful!', 'username' => $user->username));
         } else {
-            View::make('user/register.html', array('errors' => $errors));
+            Redirect::to('/register', array('errors' => $errors, 'username' => $params['username']));
         }
     }
 
