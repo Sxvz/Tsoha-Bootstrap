@@ -117,7 +117,7 @@ class Meme extends BaseModel {
     protected function add_valitron_rules() {
         $this->valitron->rule('required', array('poster', 'title', 'type', 'content'));
         $this->valitron->rule('lengthBetween', 'title', 2, 50);
-        $this->valitron->rule('lengthBetween', 'content', 2, 1000);
+        $this->valitron->rule('lengthBetween', 'content', 2, 5000);
 
         if ($this->type == 'Video') {
             $this->handle_video_rules();
