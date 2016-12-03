@@ -9,7 +9,7 @@ class CommentController extends BaseController {
         $parent_meme = Meme::find_one($comment->parent_meme);
 
         if (self::get_user_logged_in()->username == $comment->poster) {
-            View::make('comment/edit_comment.html', array('comment' => $comment, 'meme' => $parent_meme, 'user' => self::get_user_logged_in()));
+            View::make('comment/edit_comment.html', array('comment' => $comment, 'meme' => $parent_meme));
         } else {
             Redirect::to('/', array('error' => 'nope.avi'));
         }

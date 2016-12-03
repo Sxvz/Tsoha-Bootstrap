@@ -43,8 +43,8 @@
                         <li><a href="/memeDB/memes">Memes</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        {% if user %}
-                        <li><a href="/memeDB/logout">Log out ({{user.username}})</a></li>
+                        {% if user_logged_in %}
+                        <li><a href="/memeDB/logout">Log out ({{user_logged_in.username}})</a></li>
                         {% else %}
                         <li><a href="/memeDB/login">Log in</a></li>
                         {% endif %}

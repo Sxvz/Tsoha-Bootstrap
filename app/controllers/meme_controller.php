@@ -11,9 +11,9 @@ class MemeController extends BaseController {
         }
 
         if ($rnd_meme == null) {
-            View::make('meme/front_page.html', array('user' => self::get_user_logged_in()));
+            View::make('meme/front_page.html');
         } else {
-            View::make('meme/front_page.html', array('user' => self::get_user_logged_in(), 'meme' => $rnd_meme));
+            View::make('meme/front_page.html', array('meme' => $rnd_meme));
         }
     }
 
@@ -42,7 +42,7 @@ class MemeController extends BaseController {
         self::prepare_content_previews($memes);
         $pages = self::count_pages($count);
 
-        View::make('meme/memes.html', array('memes' => $memes, 'pages' => $pages, 'current_page' => $current_page, 'additional_params' => $additional_params, 'search_type' => $type, 'search_phrase' => $phrase, 'user' => self::get_user_logged_in()));
+        View::make('meme/memes.html', array('memes' => $memes, 'pages' => $pages, 'current_page' => $current_page, 'additional_params' => $additional_params, 'search_type' => $type, 'search_phrase' => $phrase));
     }
 
     private static function prepare_content_previews($memes) {
@@ -69,7 +69,7 @@ class MemeController extends BaseController {
         $meme = Meme::find_one($id);
         $comments = Comment::find_by_parent_meme($id);
 
-        View::make('meme/meme.html', array('user' => self::get_user_logged_in(), 'meme' => $meme, 'comments' => $comments));
+        View::make('meme/meme.html', array('meme' => $meme, 'comments' => $comments));
     }
 
     public static function edit_meme($id) {
@@ -78,7 +78,7 @@ class MemeController extends BaseController {
         $meme = Meme::find_one($id);
 
         if (self::get_user_logged_in()->username == $meme->poster) {
-            View::make('meme/edit_meme.html', array('meme' => $meme, 'user' => self::get_user_logged_in()));
+            View::make('meme/edit_meme.html', array('meme' => $meme));
         } else {
             Redirect::to('/', array('error' => 'nope.avi'));
         }
@@ -102,14 +102,14 @@ class MemeController extends BaseController {
                 Redirect::to('/', array('error' => 'nope.avi'));
             }
         } else {
-            View::make('meme/edit_meme.html', array('errors' => $errors, 'meme' => $meme, 'user' => self::get_user_logged_in()));
+            Redirect::to('/memes/' . $meme->id . '/edit', array('errors' => $errors, 'meme' => $meme));
         }
     }
 
     public static function create_meme() {
         self::check_logged_in();
         
-        View::make('meme/create_meme.html', array('user' => self::get_user_logged_in()));
+        View::make('meme/create_meme.html');
     }
 
     public static function store() {
