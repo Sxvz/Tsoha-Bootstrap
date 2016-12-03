@@ -39,8 +39,11 @@
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="nav navbar-nav">
                         <!-- Navigaation linkit -->
-                        <li><a href="{{base_path}}">Front page</a></li>
+                        <li><a href="{{base_path}}">Front Page</a></li>
                         <li><a href="/memeDB/memes">Memes</a></li>
+                        <li><a href="/memeDB/memes/create">New Meme</a></li>
+                        <li><a href="/memeDB/favourites">Favourites</a></li>
+                        <li><a href="/memeDB/memes?search_type=Poster&search_phrase={{user_logged_in.username}}">Own Memes</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if user_logged_in %}
