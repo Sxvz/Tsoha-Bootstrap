@@ -5,7 +5,7 @@
 Tarkoituksena on luoda järjestelmä erilaisten hauskojen internetistä löytyvien kuvien, tekstien ja videoiden varastoimiseen, jakamiseen ja kommentointiin. Kuvista säilytetään vain
 linkit palvelimen muistin säästämiseksi. Tarkoituksena ei ole perustaa sivustoa kuvien hostaamiseen.
 
-Sivuston sisältöä pystyy selailemaan anonyyminä ja kirjautumisen jälkeen voi sivustolle tuoda lisää sisältöä sekä kommentoida muiden lisäämää sisältöä. Kirjautuneet käyttäjät voivat myös muodostaa oman suosikkilistansa, sekä editoida aimemmin lisäämäänsä sisältöä.
+Sivuston sisältöä pystyy selailemaan anonyyminä ja kirjautumisen jälkeen voi sivustolle tuoda lisää sisältöä sekä kommentoida muiden lisäämää sisältöä. Kirjautuneet käyttäjät voivat myös muodostaa oman suosikkilistansa, sekä editoida aiemmin lisäämäänsä sisältöä.
 
 Toimintoja:
 - Meemien ja niihin liittyvien kommentien selailu (sekä hakeminen)
