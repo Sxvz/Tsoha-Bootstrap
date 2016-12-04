@@ -20,13 +20,12 @@ class MemeController extends BaseController {
     public static function list_memes() {
         $params = $_GET;
         $additional_params = '';
-        $current_page = 1;
         $type = null;
         $phrase = null;
-        if (isset($params['page'])) {
-            $current_page = $params['page'];
-        }
-        $offset = 10 * ($current_page - 1);
+
+        $array = self::get_current_page_and_offset();
+        $current_page = $array[0];
+        $offset = $array[1];
 
         if (isset($params['search_phrase'])) {
             $type = $params['search_type'];
@@ -45,36 +44,23 @@ class MemeController extends BaseController {
         View::make('meme/memes.html', array('memes' => $memes, 'pages' => $pages, 'current_page' => $current_page, 'additional_params' => $additional_params, 'search_type' => $type, 'search_phrase' => $phrase));
     }
 
-    private static function prepare_content_previews($memes) {
-        foreach ($memes as $meme) {
-            if ($meme->type == 'Copypasta' && strlen($meme->content) > 50) {
-                $meme->content = mb_substr($meme->content, 0, 50, 'UTF-8') . '...';
-            }
-        }
-    }
-
-    private static function count_pages($count) {
-        $pages = array();
-        $i = 1;
-        while ($count > 0) {
-            $pages[] = $i;
-            $count -= 10;
-            $i++;
-        }
-
-        return $pages;
-    }
-
     public static function single_meme($id) {
         $meme = Meme::find_one($id);
         $comments = Comment::find_by_parent_meme($id);
+        $is_favourite = false;
+        $user = self::get_user_logged_in();
+        if ($user != null) {
+            if (Favourite::find_one($user->username, $id) != null) {
+                $is_favourite = true;
+            }
+        }
 
-        View::make('meme/meme.html', array('meme' => $meme, 'comments' => $comments));
+        View::make('meme/meme.html', array('meme' => $meme, 'comments' => $comments, 'is_favourite' => $is_favourite));
     }
 
     public static function edit_meme($id) {
         self::check_logged_in();
-        
+
         $meme = Meme::find_one($id);
 
         if (self::get_user_logged_in()->username == $meme->poster) {
@@ -86,7 +72,7 @@ class MemeController extends BaseController {
 
     public static function handle_edit($id) {
         self::check_logged_in();
-        
+
         $meme = Meme::find_one($id);
         $params = $_POST;
 
@@ -108,13 +94,13 @@ class MemeController extends BaseController {
 
     public static function create_meme() {
         self::check_logged_in();
-        
+
         View::make('meme/create_meme.html');
     }
 
     public static function store() {
         self::check_logged_in();
-        
+
         $params = $_POST;
         $attributes = array(
             'poster' => self::get_user_logged_in()->username,
@@ -136,7 +122,7 @@ class MemeController extends BaseController {
 
     public static function delete($id) {
         self::check_logged_in();
-        
+
         $meme = Meme::find_one($id);
 
         if (self::get_user_logged_in()->username == $meme->poster) {

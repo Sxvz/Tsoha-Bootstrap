@@ -1,0 +1,71 @@
+{% macro error_display(errors) %}
+{% if errors %}
+<div class="alert alert-danger" align="left">
+    <ul>
+        {% for error_class in errors %}
+        {% for error in error_class %}
+        <li>{{error}}</li>
+        {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro meme_display(memes) %}
+<div class="col-xs-12">
+    <table class="table table-bordered table-striped table-hover" style="table-layout:fixed; width:100%;">
+        <thead>
+            <tr>
+                <th style="width:50%">Title</th>
+                <th class="hidden-xs" style="width:10%">Type</th>
+                <th class="hidden-xs" style="width:40%">Content preview</th>
+                <th class="visible-xs" style="width:50%">Content preview</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for meme in memes %}
+            <tr onclick="document.location = '/memeDB/memes/{{meme.id}}'">
+                <td>{{meme.title}}</td>
+                <td class="hidden-xs">{{meme.type}}</td>
+                <td><!-- style="word-break:break-all">-->
+                    {% if meme.type == 'Image' %}
+                    <img class="img-responsive" src="{{meme.content}}" alt="picture of a meme" style="max-height:100px">
+                    {% elseif meme.type == 'Copypasta' %}
+                    {{meme.content}}
+                    {% elseif meme.type == 'Video' %}
+                    <img class="img-responsive" src="https://img.youtube.com/vi/{{meme.content}}/hqdefault.jpg" alt="video thumbnail" style="max-height:100px">            
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endmacro %}
+
+{% macro pagination(pages, current_page, additional_params) %}
+<ul class="list-inline">
+    <li><strong>Pages:</strong></li>
+    {% for page in pages %}
+    {% if page == current_page %}
+    <li>{{page}}</li>
+    {% else %}
+    <li><a href="/memeDB/memes?page={{page}}{{additional_params}}" style="color:green">{{page}}</a></li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endmacro %}
+
+{% macro info_display(info, error) %}
+{% if error %}
+<div class="alert alert-danger">
+    {{error}}
+</div>
+{% endif %}
+{% if info %}
+<div class="alert alert-success">
+    {{info}}
+</div>
+{% endif %}
+{% endmacro %}

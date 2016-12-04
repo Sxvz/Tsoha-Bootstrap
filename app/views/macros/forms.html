@@ -1,17 +1,3 @@
-{% macro error_display(errors) %}
-{% if errors %}
-<div class="alert alert-danger" align="left">
-    <ul>
-        {% for error_class in errors %}
-        {% for error in error_class %}
-        <li>{{error}}</li>
-        {% endfor %}
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
-{% endmacro %}
-
 {% macro meme_content_help() %}
 <p class="help-block">For copypastas this is the content itself, for images the content should be a link to the image and for videos their video id (from Youtube) is enough.</p>
 <p class="help-block"><strong>Tip:</strong> The video id in Youtube videos is located in the URL like this <code>https://www.youtube.com/watch?v= V I D E O I D</code></p>
@@ -29,17 +15,4 @@
     <label>{{label|default('Password')}}</label>
     <input class="form-control" name="{{name|default('password')}}" type="password" style="max-width:600px">
 </div>
-{% endmacro %}
-
-{% macro info_display(info, error) %}
-{% if error %}
-<div class="alert alert-danger">
-    {{error}}
-</div>
-{% endif %}
-{% if info %}
-<div class="alert alert-success">
-    {{info}}
-</div>
-{% endif %}
 {% endmacro %}

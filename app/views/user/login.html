@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 {% import "macros/forms.html" as forms %}
+{% import "macros/utility.html" as utility %}
 <div align="center">
     <h1>Log in to your account</h1>
     <br/>
 
-    {{forms.info_display(info, error)}}
+    {{utility.info_display(info, error)}}
 
     <form method="post" action="/memeDB/login">
         {{forms.login_form_username(username)}}

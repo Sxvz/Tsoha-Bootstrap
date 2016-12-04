@@ -3,6 +3,7 @@
 abstract class BaseModel {
 
     protected $valitron;
+    protected static $entries_per_page = 10;
 
     public function __construct($attributes = null) {
         // Käydään assosiaatiolistan avaimet läpi

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+{% import "macros/utility.html" as utility %}
+
+{{utility.meme_display(memes)}}
+<!--placeholder?-->
+{{utility.pagination(pages, current_page, additional_params)}}
+{% endblock %}

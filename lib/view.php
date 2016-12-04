@@ -43,7 +43,7 @@ class View {
             foreach ($flash as $key => $value) {
 
                 //katso selitys metodin kohdalta
-                $value = self::objectToArray($value);
+                $value = self::object_to_array($value);
                 
                 $content[$key] = $value;
             }
@@ -55,7 +55,7 @@ class View {
     //muuttaa stdObject tyyppiset oliot (joita Twig ei osaa käsitellä) array muotoon
     //stdObject tyyppisiä olioita syntyy, kun esim. valitronin tuottamia virheviestejä
     //muutetaan edestakaisin redirectausten ja view::maken yhteydessä
-    private static function objectToArray($data) {
+    private static function object_to_array($data) {
         if (is_object($data)) {
             $data = get_object_vars($data);
         } elseif (is_array($data)) {

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-{% import "macros/forms.html" as forms %}
+{% import "macros/utility.html" as utility %}
 
-{{forms.info_display(info, error)}}
-{{forms.error_display(errors)}}
+{{utility.info_display(info, error)}}
+{{utility.error_display(errors)}}
 
 <div>
     <h2>{{meme.title}}</h2>
@@ -21,8 +21,11 @@
 <br/>
 <div>
     {% if user_logged_in %}
-    <!--tarkistetaan onko jo suosikeissa-->
-    <a href="/memeDB/memes/{{meme.id}}/favorite"><button class="btn btn-success">Favourite</button></a>
+    {% if is_favourite %}
+    <a href="/memeDB/memes/{{meme.id}}/unfavourite"><button class="btn btn-danger">Unfavourite</button></a>
+    {% else %}
+    <a href="/memeDB/memes/{{meme.id}}/favourite"><button class="btn btn-success">Favourite</button></a>
+    {% endif %}
     {% if user_logged_in.username == meme.poster %}
     <a href="/memeDB/memes/{{meme.id}}/edit"><button class="btn btn-warning">Edit</button></a>
     {% endif %}

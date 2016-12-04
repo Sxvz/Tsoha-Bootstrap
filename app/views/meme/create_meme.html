@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 {% import "macros/forms.html" as forms %}
+{% import "macros/utility.html" as utility %}
 <h2>Add a new meme</h2>
 
-{{forms.error_display(errors)}}
+{{utility.error_display(errors)}}
 
 <form action="/memeDB/memes/create" method="post">
     <div class="form-group">

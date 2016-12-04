@@ -76,8 +76,22 @@ $routes->post('/register', function() {
     UserController::create_account();
 });
 
+//favourites
+
+$routes->get('/favourites', function() {
+    FavouriteController::list_favourites();
+});
+
+$routes->get('/memes/:id/favourite', function($id) {
+    FavouriteController::favourite($id);
+});
+
+$routes->get('/memes/:id/unfavourite', function($id) {
+    FavouriteController::unfavourite($id);
+});
+
 //sandbox
 
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-});
+//$routes->get('/hiekkalaatikko', function() {
+//    HelloWorldController::sandbox();
+//});

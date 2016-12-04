@@ -3,7 +3,6 @@
 class Meme extends BaseModel {
 
     public $id, $poster, $title, $type, $content;
-    private static $entries_per_page = 10;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -28,9 +27,13 @@ class Meme extends BaseModel {
     }
 
     private static function fetchMany($query) {
-        $rows = $query->fetchAll();
-        $memes = array();
+        $rows = $query->fetchAll();    
 
+        return self::construct_from_rows($rows);
+    }
+    
+    public static function construct_from_rows($rows) {
+        $memes = array();
         foreach ($rows as $row) {
             $memes[] = new Meme(array(
                 'id' => $row['id'],
@@ -40,7 +43,6 @@ class Meme extends BaseModel {
                 'content' => $row['content'],
             ));
         }
-
         return $memes;
     }
 
@@ -82,8 +84,10 @@ class Meme extends BaseModel {
 
     public static function count_search_results($type, $phrase) {
         $type = self::sanitize_research_type($type);
-        $phrase = '%' . $phrase . '%';
-        $query = DB::connection()->prepare("SELECT count(*) as count FROM Meme WHERE lower($type) LIKE lower(:phrase)");
+        if ($type != 'Poster') {
+            $phrase = '%' . $phrase . '%';
+        }
+        $query = DB::connection()->prepare("SELECT count(*) AS count FROM Meme WHERE lower($type) LIKE lower(:phrase)");
         $query->execute(array('phrase' => $phrase));
         $result = $query->fetch();
 
