@@ -1,5 +1,6 @@
 <?php
 
+//Testaamiseen käytetty kontrolleri
 class HelloWorldController extends BaseController {
 
     public static function index() {

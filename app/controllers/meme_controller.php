@@ -1,7 +1,10 @@
 <?php
 
+//Huolehtii meemeihin liittyvistä pyynnöistä.
 class MemeController extends BaseController {
 
+    //Näyttää etusivun ja arpoo satunnaisesti sinne meemin näytettäväksi, ellei
+    //tietokanta jostakin syystä ole tyhjä.
     public static function index() {
         $ids = Meme::find_all_ids();
         $rnd_meme = null;
@@ -17,6 +20,9 @@ class MemeController extends BaseController {
         }
     }
 
+    //Näyttää meemien listaussivun, jolle se hakee meemit sivutettuina.
+    //Osa alatoiminnoista siirretty BaseControlleriin, koska niitä käytetään
+    //myös suosikkeja näytettäessä.
     public static function list_memes() {
         $params = $_GET;
         $additional_params = '';
@@ -44,6 +50,10 @@ class MemeController extends BaseController {
         View::make('meme/memes.html', array('memes' => $memes, 'pages' => $pages, 'current_page' => $current_page, 'additional_params' => $additional_params, 'search_type' => $type, 'search_phrase' => $phrase));
     }
 
+    //Hakee tietokannasta halutun meemin ja näyttää sen esittelysivun.
+    //Tämä esittelysivu tarjoaa myös mahdollisuuden kommentointiin ja sivuun
+    //liittyvän meemin suosikiksi merkitsemiseen (editointitoiminallisuuden
+    //lisäksi tietenkin).
     public static function single_meme($id) {
         $meme = Meme::find_one($id);
         $comments = Comment::find_by_parent_meme($id);
@@ -58,6 +68,7 @@ class MemeController extends BaseController {
         View::make('meme/meme.html', array('meme' => $meme, 'comments' => $comments, 'is_favourite' => $is_favourite));
     }
 
+    //Näyttää meemin editointisivun.
     public static function edit_meme($id) {
         self::check_logged_in();
 
@@ -70,6 +81,7 @@ class MemeController extends BaseController {
         }
     }
 
+    //Käsittelee itse editointitapahtuman.
     public static function handle_edit($id) {
         self::check_logged_in();
 
@@ -92,12 +104,14 @@ class MemeController extends BaseController {
         }
     }
 
+    //Näyttää meemin luontisivun.
     public static function create_meme() {
         self::check_logged_in();
 
         View::make('meme/create_meme.html');
     }
 
+    //Käsittelee itse luontitapahtuman.
     public static function store() {
         self::check_logged_in();
 
@@ -120,6 +134,7 @@ class MemeController extends BaseController {
         }
     }
 
+    //Käsittelee poistotapahtuman.
     public static function delete($id) {
         self::check_logged_in();
 

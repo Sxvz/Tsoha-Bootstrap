@@ -1,7 +1,9 @@
 <?php
 
+//Huolehtii suosikkeihin liittyvistä pyynnöistä
 class FavouriteController extends BaseController {
 
+    //Listaa pyynnön tehneen käyttäjän suosikit sivutettuna.
     public static function list_favourites() {
         self::check_logged_in();
 
@@ -17,6 +19,8 @@ class FavouriteController extends BaseController {
         View::make('favourite/favourites.html', array('memes' => $memes, 'pages' => $pages, 'current_page' => $current_page));
     }
 
+    //Merkitsee käyttäjälle meemin suosikiksi. Pyyntö tehdään meemin
+    //esittelysivulta.
     public static function favourite($meme_id) {
         self::check_logged_in();
 
@@ -32,6 +36,7 @@ class FavouriteController extends BaseController {
         }
     }
 
+    //Poistaa meemin käyttäjän suosikeista. Tehdään myös meemin esittelysivulta.
     public static function unfavourite($meme_id) {
         self::check_logged_in();
 

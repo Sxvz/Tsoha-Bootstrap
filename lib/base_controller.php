@@ -17,6 +17,10 @@ class BaseController {
         }
     }
     
+    //Meemien ja suosikkien jakamaa toiminnallisuutta
+
+    //Sivutuksessä käytetty metodi, joka palauttaa nykyisen sivun ja sille
+    //olennaisen offsetin kyselyä varten.
     protected static function get_current_page_and_offset() {
         $params = $_GET;
         $current_page = 1;
@@ -28,6 +32,8 @@ class BaseController {
         return array($current_page, $offset);
     }
 
+    //Laskee annetun entiteettien lukumäärän perusteella tarvittavien sivujen
+    //määrän ja palauttaa ne listana.
     protected static function count_pages($count) {
         $pages = array();
         $i = 1;
@@ -40,6 +46,8 @@ class BaseController {
         return $pages;
     }
     
+    //Lyhentää "copypasta" -tyyppisten meemien sisältöä listausnäkymään
+    //sopivammaksi.
     protected static function prepare_content_previews($memes) {
         foreach ($memes as $meme) {
             if ($meme->type == 'Copypasta' && strlen($meme->content) > 50) {

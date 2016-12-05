@@ -1,5 +1,6 @@
 <?php
 
+//Huolehtii käyttäjän autentikoinnista ja tietokantatoiminnallisuudesta.
 class User extends BaseModel {
 
     public $username, $password, $password_confirm;
@@ -8,10 +9,14 @@ class User extends BaseModel {
         parent::__construct($attributes);
     }
 
+    //Tarkistaa vastaako kannasa oleva hashi syötetyn salasanan hashiä
+    //kyseisellä käyttäjällä.
     public static function authenticate($username, $password) {
         $user = self::find_by_username($username);
 
-        //if (password_verify($password, $user->password)) { //php 5.5+ tarvitaan (laitoksen koneilla liian käpynen versio)
+        //if (password_verify($password, $user->password)) { 
+        //yllöoleva tapa on parempi mutta siihen tarvittaisiin php 5.5+
+        //(laitoksen koneilla liian käpynen versio)
         if ($user != null && $user->password === crypt($password, $user->password)) {
             return $user;
         }
@@ -19,6 +24,7 @@ class User extends BaseModel {
         return false;
     }
 
+    //Hakee kaikki käyttäjänimet kannasta.
     public static function find_all_usernames() {
         $query = DB::connection()->prepare('SELECT username FROM Usr');
         $query->execute();
@@ -27,6 +33,7 @@ class User extends BaseModel {
         return $usernames;
     }
 
+    //Hakee käyttäjän kannasta nimen perusteella.
     public static function find_by_username($username) {
         $query = DB::connection()->prepare('SELECT * FROM Usr WHERE username = :username');
         $query->execute(array('username' => $username));
@@ -44,11 +51,13 @@ class User extends BaseModel {
         return null;
     }
 
+    //Tallettaa käyttäjän kantaan.
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Usr (username, password) VALUES (:username, :password)');
         $query->execute(array('username' => $this->username, 'password' => crypt($this->password))); //php 5.5+ password_hash()
     }
 
+    //Lisää käyttäjän validointisäännöt.
     protected function add_valitron_rules() {
         $this->valitron->rule('required', array('username', 'password'));
         $this->valitron->rule('lengthBetween', 'username', 3, 20);
@@ -62,6 +71,7 @@ class User extends BaseModel {
         $this->valitron->rule('equals', 'password', 'password_confirm')->message('Passwords must match');
     }
 
+    //Tarkistaa onko käyttäjänimi uniikki.
     public function is_username_unique() {
         foreach (self::find_all_usernames() as $username) {
             if ($this->username === $username[0]) {
@@ -72,6 +82,7 @@ class User extends BaseModel {
         return true;
     }
 
+    //Alustaa validointiolion.
     protected function setup_valitron() {
         $attributes = array('username' => $this->username,
             'password' => $this->password,
