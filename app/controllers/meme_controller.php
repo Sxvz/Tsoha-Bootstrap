@@ -56,7 +56,7 @@ class MemeController extends BaseController {
     //lisäksi tietenkin).
     public static function single_meme($id) {
         $meme = Meme::find_one($id);
-        $comments = Comment::find_by_parent_meme($id);
+        $comments = Comment::find_all_by_parent_meme($id);
         $is_favourite = false;
         $user = self::get_user_logged_in();
         if ($user != null) {

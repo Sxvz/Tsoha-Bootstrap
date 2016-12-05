@@ -2,7 +2,7 @@
 {% block content %}
 {% import "macros/utility.html" as utility %}
 
-{{utiliy.error_display(errors)}}
+{{utility.error_display(errors)}}
 
 <h2>Editing a comment in: <small>{{meme.title}}</small></h2>
 <form action="/memeDB/comment/{{comment.id}}/edit" method="post">
