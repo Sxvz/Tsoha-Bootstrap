@@ -25,7 +25,7 @@
         </thead>
         <tbody>
             {% for meme in memes %}
-            <tr onclick="document.location = '/memeDB/memes/{{meme.id}}'">
+            <tr onclick="document.location = 'memes/{{meme.id}}'">
                 <td>{{meme.title}}</td>
                 <td class="hidden-xs">{{meme.type}}</td>
                 <td><!-- style="word-break:break-all">-->
@@ -51,7 +51,7 @@
     {% if page == current_page %}
     <li>{{page}}</li>
     {% else %}
-    <li><a href="/memeDB/memes?page={{page}}{{additional_params}}" style="color:green">{{page}}</a></li>
+    <li><a href="{{base_path}}/memes?page={{page}}{{additional_params}}" style="color:green">{{page}}</a></li>
     {% endif %}
     {% endfor %}
 </ul>

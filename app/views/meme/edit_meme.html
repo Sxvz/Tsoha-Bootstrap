@@ -6,7 +6,7 @@
 
 {{utility.error_display(errors)}}
 
-<form action="/memeDB/memes/{{meme.id}}/edit" method="post">
+<form action="{{base_path}}/memes/{{meme.id}}/edit" method="post">
     <div class="form-group">
         <label>Title</label>
         <input type="text" class="form-control" name="title" value="{{meme.title}}">
@@ -25,7 +25,7 @@
 
     <button type="submit" class="btn btn-primary">Save Changes</button>
     <button type="reset" class="btn btn-default">Undo</button>
-    <a href="/memeDB/memes/{{meme.id}}"><button type="button" class="btn btn-warning">Return without saving</button></a>
-    <a class="btn btn-danger" href="/memeDB/memes/{{meme.id}}/delete" id="deleteButton">Delete</a>
+    <a href="{{base_path}}/memes/{{meme.id}}"><button type="button" class="btn btn-warning">Return without saving</button></a>
+    <a class="btn btn-danger" href="{{base_path}}/memes/{{meme.id}}/delete" id="deleteButton">Delete</a>
 </form>
 {% endblock %}

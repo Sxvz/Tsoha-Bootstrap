@@ -89,9 +89,3 @@ $routes->get('/memes/:id/favourite', function($id) {
 $routes->get('/memes/:id/unfavourite', function($id) {
     FavouriteController::unfavourite($id);
 });
-
-//sandbox
-
-//$routes->get('/hiekkalaatikko', function() {
-//    HelloWorldController::sandbox();
-//});

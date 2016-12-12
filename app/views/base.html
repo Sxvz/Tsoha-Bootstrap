@@ -40,18 +40,18 @@
                     <ul class="nav navbar-nav">
                         <!-- Navigaation linkit -->
                         <li><a href="{{base_path}}">Front Page</a></li>
-                        <li><a href="/memeDB/memes">Memes</a></li>
+                        <li><a href="{{base_path}}/memes">Memes</a></li>
                         {% if user_logged_in %}
-                        <li><a href="/memeDB/memes/create">New Meme</a></li>
-                        <li><a href="/memeDB/favourites">Favourites</a></li>
-                        <li><a href="/memeDB/memes?search_type=Poster&search_phrase={{user_logged_in.username}}">Own Memes</a></li>
+                        <li><a href="{{base_path}}/memes/create">New Meme</a></li>
+                        <li><a href="{{base_path}}/favourites">Favourites</a></li>
+                        <li><a href="{{base_path}}/memes?search_type=Poster&search_phrase={{user_logged_in.username}}">Own Memes</a></li>
                         {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if user_logged_in %}
-                        <li><a href="/memeDB/logout">Log out ({{user_logged_in.username}})</a></li>
+                        <li><a href="{{base_path}}/logout">Log out ({{user_logged_in.username}})</a></li>
                         {% else %}
-                        <li><a href="/memeDB/login">Log in</a></li>
+                        <li><a href="{{base_path}}/login">Log in</a></li>
                         {% endif %}
                     </ul>
                 </div>

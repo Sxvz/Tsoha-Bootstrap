@@ -10,30 +10,30 @@
         {% if user_logged_in %}
         <div>
             <h3>Currently logged in as: <small>{{user_logged_in.username}}</small></h3>
-            <a href="/memeDB/favourites"><button class="btn btn-default" style="width:100%">Favourites</button></a>
-            <a href="/memeDB/memes?search_type=Poster&search_phrase={{user_logged_in.username}}"><button class="btn btn-default" style="width:100%">Own memes</button></a>
-            <a href="/memeDB/memes/create"><button class="btn btn-success" style="width:100%">Add a new meme</button></a>
+            <a href="{{base_path}}/favourites"><button class="btn btn-default" style="width:100%">Favourites</button></a>
+            <a href="{{base_path}}/memes?search_type=Poster&search_phrase={{user_logged_in.username}}"><button class="btn btn-default" style="width:100%">Own memes</button></a>
+            <a href="{{base_path}}/memes/create"><button class="btn btn-success" style="width:100%">Add a new meme</button></a>
         </div>
         {% else %}
         <div>
             <h3>You are currently not logged in</h3>
-            <a href="/memeDB/login"><button class="btn btn-primary" style="width:100%">Log in</button></a>   
-            <a href="/memeDB/register"><button class="btn btn-primary" style="width:100%">Register</button></a>   
+            <a href="{{base_path}}/login"><button class="btn btn-primary" style="width:100%">Log in</button></a>   
+            <a href="{{base_path}}/register"><button class="btn btn-primary" style="width:100%">Register</button></a>   
         </div>
         {% endif %}
         <div>
-            <a href="/memeDB/memes"><button class="btn btn-primary" style="width:100%">Memes</button></a>
+            <a href="{{base_path}}/memes"><button class="btn btn-primary" style="width:100%">Memes</button></a>
         </div>
     </div>
     <div class="col-md-6">
         <h3>Random Meme</h3>
-        <h4><a href="/memeDB/memes/{{meme.id}}">{{meme.title}}</a></h4>
+        <h4><a href="{{base_path}}/memes/{{meme.id}}">{{meme.title}}</a></h4>
         {% if meme.type == 'Image' %}
-        <a href="/memeDB/memes/{{meme.id}}">
+        <a href="{{base_path}}/memes/{{meme.id}}">
             <img src="{{meme.content}}" class="img-responsive" alt="picture of a meme">
         </a>
         {% elseif meme.type == 'Copypasta' %}
-        <a href="/memeDB/memes/{{meme.id}}" style="color:black;text-decoration:none">
+        <a href="{{base_path}}/memes/{{meme.id}}" style="color:black;text-decoration:none">
             <p>{{meme.content}}</p>
         </a>
         {% elseif meme.type == 'Video' %}

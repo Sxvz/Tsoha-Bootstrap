@@ -8,7 +8,7 @@
 
     {{utility.info_display(info, error)}}
 
-    <form method="post" action="/memeDB/login">
+    <form method="post" action="{{base_path}}/login">
         {{forms.login_form_username(username)}}
 
         {{forms.login_form_password()}}
@@ -17,6 +17,6 @@
     </form>
     <br/>
     <br/>
-    <p>Don't have an account? <a href="/memeDB/register" style="color:blue">Create an account.</a></p>
+    <p>Don't have an account? <a href="{{base_path}}/register" style="color:blue">Create an account.</a></p>
 </div>
 {% endblock %}
