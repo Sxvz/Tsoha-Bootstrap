@@ -51,7 +51,7 @@
     {% if page == current_page %}
     <li>{{page}}</li>
     {% else %}
-    <li><a href="{{base_path}}/memes?page={{page}}{{additional_params}}" style="color:green">{{page}}</a></li>
+    <li><a href="memes?page={{page}}{{additional_params}}" style="color:green">{{page}}</a></li>
     {% endif %}
     {% endfor %}
 </ul>

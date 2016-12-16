@@ -61,7 +61,7 @@ class User extends BaseModel {
     protected function add_valitron_rules() {
         $this->valitron->rule('required', array('username', 'password'));
         $this->valitron->rule('lengthBetween', 'username', 3, 20);
-        $this->valitron->rule('lengthMin', 'password', 6);
+        $this->valitron->rule('lengthMin', 'password', 6)->message("Password must be longer than 6 characters");
         $user = $this;
         $this->valitron->addRule('usernameUnique', function($field, $value, array $params, array $fields) use($user) {
             return $user->is_username_unique();
