@@ -34,11 +34,11 @@ class Meme extends BaseModel {
 
     //Apumetodi, joka kerää kyselyn tulokset, ja palauttaa ne olioina.
     private static function fetchMany($query) {
-        $rows = $query->fetchAll();    
+        $rows = $query->fetchAll();
 
         return self::construct_from_rows($rows);
     }
-    
+
     //Apumetodi, joka rakentaa kyselyn tuluoksista meemi-olioita.
     //Käytetään myös FavouriteControllerissa, kun haetaan suosikkeja.
     public static function construct_from_rows($rows) {
@@ -142,6 +142,13 @@ class Meme extends BaseModel {
         $this->valitron->rule('required', array('poster', 'title', 'type', 'content'));
         $this->valitron->rule('lengthBetween', 'title', 2, 50);
         $this->valitron->rule('lengthBetween', 'content', 2, 5000);
+        $this->valitron->addRule('typeIsValid', function($field, $value, array $params, array $fields) {
+            if ($value !== "Copypasta" && $value !== "Image" && $value !== "Video") {
+                return false;
+            }
+            return true;
+        }, 'is not valid');
+        $this->valitron->rule('typeIsValid', 'type')->message('Just no');
 
         if ($this->type == 'Video') {
             $this->handle_video_rules();
