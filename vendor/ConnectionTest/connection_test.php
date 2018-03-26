@@ -121,7 +121,8 @@ function prettyprint($data) {
     return;
   }
   echo '<table class="table table-striped table-bordered">';
-  echo '<tr>',implode('', array_map(function($t) {return "<th>$t</th>";}, array_keys((array)array_shift(array_values($data))))),'</tr>';
+  $tmp = array_values($data);
+  echo '<tr>',implode('', array_map(function($t) {return "<th>$t</th>";}, array_keys((array)array_shift($tmp)))),'</tr>';
   foreach($data as $datum) {
     echo '<tr>',implode('', array_map(function($t) {return "<td>$t</td>";}, (array)$datum)),'</tr>';
   }
@@ -147,9 +148,9 @@ try {
   <meta charset="utf-8">
   <title>Tietokantayhteystesti</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-  <script src="vendor/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <style>.panel h2 {text-transform: capitalize; } th {text-transform: capitalize;}</style>
 </head>
 <body style="padding: 25px;">

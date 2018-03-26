@@ -9,13 +9,13 @@ class User extends BaseModel {
         parent::__construct($attributes);
     }
 
-    //Tarkistaa vastaako kannasa oleva hashi syötetyn salasanan hashiä
+    //Tarkistaa vastaako kannassa oleva hashi syötetyn salasanan hashiä
     //kyseisellä käyttäjällä.
     public static function authenticate($username, $password) {
         $user = self::find_by_username($username);
 
         //if (password_verify($password, $user->password)) { 
-        //yllöoleva tapa on parempi mutta siihen tarvittaisiin php 5.5+
+        //ylläoleva tapa on parempi mutta siihen tarvittaisiin php 5.5+
         //(laitoksen koneilla liian käpynen versio)
         if ($user != null && $user->password === crypt($password, $user->password)) {
             return $user;
@@ -54,7 +54,7 @@ class User extends BaseModel {
     //Tallettaa käyttäjän kantaan.
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Usr (username, password) VALUES (:username, :password)');
-        $query->execute(array('username' => $this->username, 'password' => crypt($this->password))); //php 5.5+ password_hash()
+        $query->execute(array('username' => $this->username, 'password' => password_hash($this->password, PASSWORD_DEFAULT))); //php 5.5+ password_hash() ja crypt() php <5.5
     }
 
     //Lisää käyttäjän validointisäännöt.

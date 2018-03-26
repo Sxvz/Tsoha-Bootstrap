@@ -51,7 +51,9 @@ class BaseController {
     protected static function prepare_content_previews($memes) {
         foreach ($memes as $meme) {
             if ($meme->type == 'Copypasta' && strlen($meme->content) > 50) {
-                $meme->content = mb_substr($meme->content, 0, 50, 'UTF-8') . '...';
+                //users2017 palvelimella ei ole mbstring moduulia
+                //$meme->content = mb_substr($meme->content, 0, 50, 'UTF-8') . '...';
+                $meme->content = substr($meme->content, 0, 50) . '...';
             }
         }
     }
